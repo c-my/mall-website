@@ -8,6 +8,10 @@ public class Goods {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer goodsID = 0;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     private String name;
 
     private Integer count;

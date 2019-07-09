@@ -1,4 +1,4 @@
-package edu.neu.neumall.Repository;
+package edu.neu.neumall.repository;
 
 import edu.neu.neumall.entity.Goods;
 import org.springframework.data.repository.CrudRepository;

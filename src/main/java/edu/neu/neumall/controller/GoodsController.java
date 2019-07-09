@@ -1,6 +1,6 @@
 package edu.neu.neumall.controller;
 
-import edu.neu.neumall.Repository.GoodsRepository;
+import edu.neu.neumall.repository.GoodsRepository;
 import edu.neu.neumall.entity.Goods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
