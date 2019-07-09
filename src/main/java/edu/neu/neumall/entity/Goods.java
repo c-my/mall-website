@@ -1,12 +1,12 @@
-package edu.neu.neumall.model;
+package edu.neu.neumall.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Goods {
     @Id
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer goodsID = 0;
 
     private String name;
 
@@ -18,8 +18,8 @@ public class Goods {
         return count;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getGoodsID() {
+        return goodsID;
     }
 
     public String getName() {
@@ -38,8 +38,8 @@ public class Goods {
         this.description = description;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setGoodsID(Integer goodsID) {
+        this.goodsID = goodsID;
     }
 
     public void setName(String name) {

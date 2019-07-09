@@ -1,4 +1,4 @@
-package edu.neu.neumall.model;
+package edu.neu.neumall.entity;
 
 public class Greeting {
     private final long id;
