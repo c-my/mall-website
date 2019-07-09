@@ -1,9 +1,13 @@
 package edu.neu.neumall.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-public class Goods {
+public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer goodsID = 0;
@@ -17,6 +21,12 @@ public class Goods {
     private Integer count;
 
     private String description;
+
+    @CreationTimestamp
+    private Date create_time;
+
+    @UpdateTimestamp
+    private Date update_time;
 
     public Integer getCount() {
         return count;
@@ -48,5 +58,21 @@ public class Goods {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
+    }
+
+    public Date getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Date update_time) {
+        this.update_time = update_time;
     }
 }

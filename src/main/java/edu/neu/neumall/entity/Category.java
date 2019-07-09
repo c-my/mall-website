@@ -15,13 +15,13 @@ public class Category {
     private String categoryName;
 
     @OneToMany(mappedBy = "category")
-    private List<Goods> goods;
+    private List<Products> goods;
 
-    public List<Goods> getGoods() {
+    public List<Products> getGoods() {
         return goods;
     }
 
-    public void setGoods(List<Goods> goods) {
+    public void setGoods(List<Products> goods) {
         this.goods = goods;
     }
 

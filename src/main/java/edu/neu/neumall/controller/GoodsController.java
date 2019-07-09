@@ -1,7 +1,7 @@
 package edu.neu.neumall.controller;
 
 import edu.neu.neumall.repository.GoodsRepository;
-import edu.neu.neumall.entity.Goods;
+import edu.neu.neumall.entity.Products;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,14 +14,14 @@ public class GoodsController {
 
     @GetMapping(path = "all")
     public @ResponseBody
-    Iterable<Goods> getAllGoods() {
+    Iterable<Products> getAllGoods() {
         return goodsRepository.findAll();
     }
 
     @GetMapping(path = "add")
     public @ResponseBody
     String addNewGoods(@RequestParam String name, @RequestParam String description, @RequestParam Integer count) {
-        Goods g = new Goods();
+        Products g = new Products();
         g.setCount(count);
         g.setDescription(description);
         g.setName(name);
