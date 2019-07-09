@@ -4,22 +4,44 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
 public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer goodsID = 0;
+    @Column(name = "product_id")
+    private Integer productID;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "owner")
+    private User owner;
+
+    @NotNull
+    @Column(name = "product_name")
     private String name;
 
+    @NotNull
+    @Column(name = "product_count")
     private Integer count;
 
+    @NotNull
+    @Column(name = "product_price")
+    private Double price;
+
+    @NotNull
+    @Column(name = "product_status")
+    private Integer status;
+
+    @NotNull
+    @Column(name = "product_desciption")
     private String description;
 
     @CreationTimestamp
@@ -32,8 +54,8 @@ public class Products {
         return count;
     }
 
-    public Integer getGoodsID() {
-        return goodsID;
+    public Integer getProductID() {
+        return productID;
     }
 
     public String getName() {
@@ -52,8 +74,8 @@ public class Products {
         this.description = description;
     }
 
-    public void setGoodsID(Integer goodsID) {
-        this.goodsID = goodsID;
+    public void setProductID(Integer productID) {
+        this.productID = productID;
     }
 
     public void setName(String name) {

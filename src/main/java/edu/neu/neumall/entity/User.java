@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User {
@@ -43,6 +44,10 @@ public class User {
 
     @UpdateTimestamp
     private Date update_time;
+
+    //sells relation between user and products
+    @OneToMany(mappedBy = "owner")
+    private List<Products> productsList;
 
     public Integer getUserID() {
         return userID;
