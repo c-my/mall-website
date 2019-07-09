@@ -1,21 +1,20 @@
 package edu.neu.neumall.controller;
 
-import edu.neu.neumall.repository.GoodsRepository;
+import edu.neu.neumall.repository.ProductRepository;
 import edu.neu.neumall.entity.Products;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-//@Controller
 @RestController
 @RequestMapping(path = "/goods")
 public class GoodsController {
     @Autowired
-    private GoodsRepository goodsRepository;
+    private ProductRepository productRepository;
 
     @GetMapping(path = "all")
     public @ResponseBody
     Iterable<Products> getAllGoods() {
-        return goodsRepository.findAll();
+        return productRepository.findAll();
     }
 
     @GetMapping(path = "add")
@@ -25,7 +24,7 @@ public class GoodsController {
         g.setCount(count);
         g.setDescription(description);
         g.setName(name);
-        goodsRepository.save(g);
+        productRepository.save(g);
         return "added";
     }
 

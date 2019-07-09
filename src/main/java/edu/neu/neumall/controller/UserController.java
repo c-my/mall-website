@@ -12,26 +12,16 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("all")
-    public @ResponseBody Iterable<User> getAllUsers(){
+    public @ResponseBody
+    Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    @GetMapping("add")
-    public @ResponseBody String addNewUser(@RequestParam String name,
-                                           @RequestParam String passwd ,
-                                           @RequestParam String phone,
-                                           @RequestParam String email,
-                                           @RequestParam String question,
-                                           @RequestParam String answer){
-        User u = new User();
-        u.setAnswer(answer);
-        u.setEmail(email);
-        u.setPhone(phone);
-        u.setPassword(passwd);
-        u.setQuestion(question);
-        u.setUserName(name);
+    @PostMapping("add")
+    public @ResponseBody
+    String addNewUser(@RequestBody User user) {
+        User u = user;
         userRepository.save(u);
         return "user added";
-
     }
 }
