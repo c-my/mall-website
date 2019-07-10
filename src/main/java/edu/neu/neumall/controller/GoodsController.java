@@ -14,6 +14,7 @@ public class GoodsController {
     @GetMapping(path = "all")
     public @ResponseBody
     Iterable<Products> getAllGoods() {
+
         return productRepository.findAll();
     }
 
