@@ -10,14 +10,16 @@
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="../js/popper.min.js"></script>
     <script>
-        var startUp = function () {
+        var refreshUserList = function () {
+            $("#user-table").find(".user-item").remove();
+
             $.getJSON("/user/all", function (data) {
                 console.log(data);
-                var rowCount = $("#user-table").find("tr").length;
+                var rowCount = 0;
                 $.each(data, function (i, item) {
                     console.log(item);
-                    var col = "<tr><td scope=\"col\">" +
-                        ++length + "</td><td>" +
+                    var col = "<tr class='user-item'><td scope=\"col\">" +
+                        ++rowCount + "</td><td>" +
                         item.userName +
                         "</td><td>" +
                         item.email +
@@ -28,7 +30,7 @@
                 })
             })
         }
-        window.onload = startUp();
+        window.onload = refreshUserList();
 
         function getFormData($form) {
             var unindexed_array = $form.serializeArray();
@@ -48,10 +50,10 @@
                     type: "POST",
                     url: "/user/add",
                     contentType: "application/json",
-                    data: JSON.stringify(postData)
+                    data: JSON.stringify(postData),
+                    success: refreshUserList
                 }
             )
-
         }
 
     </script>
