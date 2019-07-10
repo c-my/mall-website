@@ -1,5 +1,6 @@
 package edu.neu.neumall.entity;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -52,15 +53,22 @@ public class User {
     @OneToMany(mappedBy = "owner")
     private List<Shipping> shippingList;
 
+    @NotNull
+    @Column(name = "user_role")
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole = UserRole.BUYER;
+
+    public static enum UserRole {
+        ADMIN, SELLER, BUYER
+    }
+
     public Integer getUserID() {
         return userID;
     }
 
-
     public void setUserID(Integer userID) {
         this.userID = userID;
     }
-
 
     public String getEmail() {
         return email;
