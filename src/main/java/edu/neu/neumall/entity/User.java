@@ -3,14 +3,15 @@ package edu.neu.neumall.entity;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
@@ -53,14 +54,19 @@ public class User {
     @OneToMany(mappedBy = "owner")
     private List<Shipping> shippingList;
 
-    @NotNull
-    @Column(name = "user_role")
-    @Enumerated(EnumType.STRING)
-    private UserRole userRole = UserRole.BUYER;
+    @ManyToMany
+    private Set<Products> purchaseList;
 
-    public static enum UserRole {
-        ADMIN, SELLER, BUYER
-    }
+
+    @NotNull
+    @Column(name = "role")
+    private Integer role;
+
+//    @NotNull
+//    @ManyToOne
+//    @JoinColumn(name = "role")
+//    private Role role;
+
 
     public Integer getUserID() {
         return userID;
@@ -102,8 +108,38 @@ public class User {
         this.phone = phone;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return new HashSet<GrantedAuthority>();
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
@@ -132,5 +168,13 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
     }
 }

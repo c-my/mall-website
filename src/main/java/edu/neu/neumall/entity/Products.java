@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Products {
@@ -23,6 +24,9 @@ public class Products {
     @ManyToOne
     @JoinColumn(name = "owner")
     private User owner;
+
+    @ManyToMany
+    private Set<User> buyer;
 
     @NotNull
     @Column(name = "product_name")

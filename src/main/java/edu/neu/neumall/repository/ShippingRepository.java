@@ -1,7 +1,7 @@
 package edu.neu.neumall.repository;
 
 import edu.neu.neumall.entity.Shipping;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ShippingRepository extends CrudRepository<Shipping, Integer> {
+public interface ShippingRepository extends JpaRepository<Shipping, Integer> {
 }
