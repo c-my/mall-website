@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../js/popper.min.js"></script>
+    <script>
+        var startUp = function () {
+            $.getJSON("/user/all", function (data) {
+                console.log(data);
+                var rowCount = $("#user-table").find("tr").length;
+                $.each(data, function (i, item) {
+                    console.log(item);
+                    var col = "<tr><td scope=\"col\">" +
+                        ++length + "</td><td>" +
+                        item.userName +
+                        "</td><td>" +
+                        item.email +
+                        "</td><td>" +
+                        item.phone +
+                        "</td></tr>"
+                    $("#user-table").children("tbody").append(col);
+                })
+            })
+        }
+        window.onload = startUp();
+
+        function getFormData($form) {
+            var unindexed_array = $form.serializeArray();
+            var indexed_array = {};
+
+            $.map(unindexed_array, function (n, i) {
+                indexed_array[n['name']] = n['value'];
+            });
+
+            return indexed_array;
+        }
+
+        var addUser = function () {
+            var postData = (getFormData($("#userinfo-form :input")));
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "/user/add",
+                    contentType: "application/json",
+                    data: JSON.stringify(postData)
+                }
+            )
+
+        }
+
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <table class="table" id="user-table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                </tr>
+                <tbody>
+                </tbody>
+                </thead>
+            </table>
+        </div>
+        <div class="col-3">
+            <form id="userinfo-form">
+                <div class="form-group">
+                    <label for="username-input">User Name</label>
+                    <input id="username-input" type="text" class="form-control" name="userName">
+                </div>
+                <div class="form-group">
+                    <label for="email-input">Email</label>
+                    <input id="email-input" type="email" class="form-control" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="phone-input">Phone</label>
+                    <input id="phone-input" type="tel" class="form-control" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="password-input">Password</label>
+                    <input id="password-input" type="password" class="form-control" name="password">
+                </div>
+
+                <div class="form-group">
+                    <label for="question-input">Question</label>
+                    <input id="question-input" type="text" class="form-control" name="question">
+                </div>
+
+                <div class="form-group">
+                    <label for="answer-input">Answer</label>
+                    <input id="answer-input" type="text" class="form-control" name="answer">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="addUser()">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

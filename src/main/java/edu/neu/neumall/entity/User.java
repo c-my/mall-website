@@ -49,6 +49,9 @@ public class User {
     @OneToMany(mappedBy = "owner")
     private List<Products> productsList;
 
+    @OneToMany(mappedBy = "owner")
+    private List<Shipping> shippingList;
+
     public Integer getUserID() {
         return userID;
     }

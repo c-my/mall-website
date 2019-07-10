@@ -33,7 +33,7 @@ public class Products {
     private Integer count;
 
     @NotNull
-    @Column(name = "product_price")
+    @Column(name = "product_price", columnDefinition = "DECIMAL(20,2)")
     private Double price;
 
     @NotNull
