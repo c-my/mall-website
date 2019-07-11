@@ -1,6 +1,7 @@
 package edu.neu.neumall.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,9 +22,9 @@ public class User implements UserDetails {
     @Column(name = "user_name")
     private String userName;
 
-    @JsonIgnore
     @NotNull
     @Column(name = "user_password")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(name = "user_phone")
