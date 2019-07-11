@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByPriceBetween(double low, double high);
 
     List<Product> findByPrice(double price);
@@ -24,4 +24,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findByPriceBetweenAndCategory_CategoryName(double low, double high, String category);
 
+    void deleteByProductID(long id);
 }

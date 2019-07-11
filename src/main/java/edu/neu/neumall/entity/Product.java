@@ -1,9 +1,6 @@
 package edu.neu.neumall.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,7 +14,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Integer productID;
+    private long productID;
 
     @NotNull
     @ManyToOne
@@ -49,6 +46,9 @@ public class Product {
     @Column(name = "product_status")
     private Integer status;
 
+    @Column(name = "main_img")
+    private String main_img = "";
+
     @NotNull
     @Column(name = "product_desciption")
     private String description;
@@ -63,7 +63,7 @@ public class Product {
         return count;
     }
 
-    public Integer getProductID() {
+    public Long getProductID() {
         return productID;
     }
 
@@ -83,7 +83,7 @@ public class Product {
         this.description = description;
     }
 
-    public void setProductID(Integer productID) {
+    public void setProductID(Long productID) {
         this.productID = productID;
     }
 
@@ -141,5 +141,13 @@ public class Product {
 
     public String getCategoryName() {
         return this.category.getCategoryName();
+    }
+
+    public String getMain_img() {
+        return main_img;
+    }
+
+    public void setMain_img(String main_img) {
+        this.main_img = main_img;
     }
 }
