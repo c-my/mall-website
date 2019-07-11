@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/goods")
-public class GoodsController {
+@RequestMapping(path = "/product")
+public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
