@@ -1,5 +1,9 @@
 package edu.neu.neumall.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,6 +18,7 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "category")
     private List<Product> goods;
 
@@ -40,4 +45,5 @@ public class Category {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+
 }

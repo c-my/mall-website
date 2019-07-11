@@ -1,5 +1,6 @@
 package edu.neu.neumall.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,7 @@ public class User implements UserDetails {
     @Column(name = "user_name")
     private String userName;
 
+    @JsonIgnore
     @NotNull
     @Column(name = "user_password")
     private String password;
