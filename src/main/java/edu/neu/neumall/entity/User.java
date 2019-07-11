@@ -1,6 +1,5 @@
 package edu.neu.neumall.entity;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -49,13 +48,13 @@ public class User implements UserDetails {
 
     //sells relation between user and products
     @OneToMany(mappedBy = "owner")
-    private List<Products> productsList;
+    private List<Product> productList;
 
     @OneToMany(mappedBy = "owner")
     private List<Shipping> shippingList;
 
     @ManyToMany
-    private Set<Products> purchaseList;
+    private Set<Product> purchaseList;
 
 
     @NotNull

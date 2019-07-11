@@ -1,7 +1,10 @@
 package edu.neu.neumall.repository;
 
-import edu.neu.neumall.entity.Products;
+import edu.neu.neumall.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProductRepository extends JpaRepository<Products, Integer> {
+import java.util.List;
+
+public interface ProductRepository extends JpaRepository<Product, Integer> {
+    List<Product> findByPriceBetween(Double low, Double high);
 }
