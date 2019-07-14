@@ -1,10 +1,11 @@
 package edu.neu.neumall.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -19,20 +20,19 @@ public class User implements UserDetails {
     private Integer userID;
 
     @NotNull
-    @Column(name = "user_name")
-    private String userName;
+    @Column(name = "nick_name")
+    private String nickName;
 
     @NotNull
     @Column(name = "user_password")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @Column(name = "user_phone")
+    @Column(name = "user_phone", unique = true)
     @NotNull
     private String phone;
 
-    @NotNull
-    @Column(name = "user_email")
+    @Column(name = "user_email", unique = true)
     private String email;
 
     @NotNull
@@ -61,13 +61,20 @@ public class User implements UserDetails {
 
 
     @NotNull
-    @Column(name = "role")
-    private Integer role;
+    @Enumerated(value = EnumType.STRING)
+    private UserRole role;
 
-//    @NotNull
-//    @ManyToOne
-//    @JoinColumn(name = "role")
-//    private Role role;
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public static enum UserRole {
+        CUSTOMER, SHOPKEEPER, ADMIN, NONE
+    }
 
 
     public Integer getUserID() {
@@ -112,7 +119,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new HashSet<GrantedAuthority>();
+        return Arrays.asList(new SimpleGrantedAuthority(role.name()));
     }
 
     public String getPassword() {
@@ -121,7 +128,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return nickName;
     }
 
     @Override
@@ -164,19 +171,12 @@ public class User implements UserDetails {
         this.update_time = update_time;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
-    public Integer getRole() {
-        return role;
-    }
-
-    public void setRole(Integer role) {
-        this.role = role;
-    }
 }
