@@ -26,14 +26,14 @@ public class LoginController {
         return "login.html";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String createNewUser(@RequestBody User user) {
-        User userExists = userService.findUserByName(user.getUserName());
-        if (userExists != null) {
-
-        } else {
-            userService.saveUser(user);
-        }
-        return "html/userlist.html";
-    }
+//    @RequestMapping(value = "/register", method = RequestMethod.POST)
+//    public String createNewUser(@RequestBody User user) {
+//        User userExists = userService.findUserByName(user.getNickName());
+//        if (userExists != null) {
+//
+//        } else {
+//            userService.saveUser(user);
+//        }
+//        return "html/userlist.html";
+//    }
 }
