@@ -1,8 +1,14 @@
 package edu.neu.neumall.controller;
 
+import edu.neu.neumall.entity.Category;
 import edu.neu.neumall.entity.Product;
+import edu.neu.neumall.entity.User;
+import edu.neu.neumall.form.ProductUpdateForm;
+import edu.neu.neumall.form.RegistrationForm;
+import edu.neu.neumall.repository.CategoryRepository;
 import edu.neu.neumall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -15,12 +21,15 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
 
+    private final CategoryRepository categoryRepository;
+
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CategoryRepository categoryRepository) {
         this.productService = productService;
+        this.categoryRepository = categoryRepository;
     }
 
-    @GetMapping(path = "all")
+    @GetMapping
     public @ResponseBody
     Iterable<Product> getAllGoods(@RequestParam(required = false, defaultValue = "0") String price_low,
                                   @RequestParam(required = false, defaultValue = "0") String price_high,
@@ -47,15 +56,22 @@ public class ProductController {
         return productList;
     }
 
-    @GetMapping(path = "add")
-    public @ResponseBody
-    String addNewGoods(@RequestParam String name, @RequestParam String description, @RequestParam Integer count) {
-        Product g = new Product();
-        g.setCount(count);
-        g.setDescription(description);
-        g.setName(name);
+
+    @PutMapping
+    public String addNewGoods(ProductUpdateForm form,
+                              @AuthenticationPrincipal User owner) {
+        Product g = form.toProduct();
+        g.setOwner(owner);
+
+        var categoryName = g.getCategoryName();
+        var category = categoryRepository.findByCategoryName(categoryName);
+        if (category == null) {
+            categoryRepository.save(g.getCategory());
+        }
+        category = categoryRepository.findByCategoryName(categoryName);
+        g.setCategory(category);
         productService.addProduct(g);
-        return "added";
+        return "{\"success\":\"true\"}";
     }
 
 }

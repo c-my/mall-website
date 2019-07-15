@@ -44,7 +44,8 @@ public class Product {
 
     @NotNull
     @Column(name = "product_status")
-    private Integer status;
+    @Enumerated(value = EnumType.STRING)
+    private ProductStatus status;
 
     @Column(name = "main_img")
     private String main_img = "";
@@ -58,6 +59,10 @@ public class Product {
 
     @UpdateTimestamp
     private Date update_time;
+
+    public static enum ProductStatus {
+        ONSALE, OFFSALE
+    }
 
     public Integer getCount() {
         return count;
@@ -131,16 +136,24 @@ public class Product {
         this.price = price;
     }
 
-    public Integer getStatus() {
+    public ProductStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(ProductStatus status) {
         this.status = status;
     }
 
     public String getCategoryName() {
         return this.category.getCategoryName();
+    }
+
+    public void setStatusByName(String status) {
+        try {
+            this.status = ProductStatus.valueOf(status);
+        } catch (IllegalArgumentException e) {
+            this.status = ProductStatus.OFFSALE;
+        }
     }
 
     public String getMain_img() {

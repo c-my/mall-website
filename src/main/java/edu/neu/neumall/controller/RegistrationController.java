@@ -28,11 +28,6 @@ public class RegistrationController {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-//    @GetMapping
-//    public String registrationPage() {
-//        return "pages/register.html";
-//    }
-
     @PostMapping
     public String processRegistration(RegistrationForm form) {
         User user = userRepository.findByPhone(form.getPhone());
