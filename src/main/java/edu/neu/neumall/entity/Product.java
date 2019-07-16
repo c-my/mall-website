@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
+@Access(AccessType.FIELD)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +54,9 @@ public class Product {
     @NotNull
     @Column(name = "product_desciption")
     private String description;
+
+    @OneToMany(mappedBy = "product_id")
+    private Set<Order> product_order;
 
     @CreationTimestamp
     private Date create_time;

@@ -24,5 +24,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByPriceBetweenAndCategory_CategoryName(double low, double high, String category);
 
+    Product findByProductID(long id);
+
     void deleteByProductID(long id);
 }

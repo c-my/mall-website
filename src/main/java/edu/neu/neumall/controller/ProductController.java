@@ -57,6 +57,7 @@ public class ProductController {
     }
 
 
+    @PostMapping
     @PutMapping
     public String addNewGoods(ProductUpdateForm form,
                               @AuthenticationPrincipal User owner) {
@@ -74,4 +75,9 @@ public class ProductController {
         return "{\"success\":\"true\"}";
     }
 
+    @DeleteMapping
+    public String deleteProduct(long productid) {
+        productService.deleteProduct(productid);
+        return "{\"success\":\"true\"}";
+    }
 }

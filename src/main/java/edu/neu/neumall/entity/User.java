@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
+@Access(AccessType.FIELD)
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,6 +60,8 @@ public class User implements UserDetails {
     @ManyToMany
     private Set<Product> purchaseList;
 
+    @OneToMany(mappedBy = "user_id")
+    private Set<Order> user_order;
 
     @NotNull
     @Enumerated(value = EnumType.STRING)
