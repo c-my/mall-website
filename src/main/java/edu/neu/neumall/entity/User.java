@@ -18,7 +18,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
-    private Integer userID;
+    private long userID;
 
     @NotNull
     @Column(name = "nick_name")
@@ -80,11 +80,11 @@ public class User implements UserDetails {
     }
 
 
-    public Integer getUserID() {
+    public long getUserID() {
         return userID;
     }
 
-    public void setUserID(Integer userID) {
+    public void setUserID(long userID) {
         this.userID = userID;
     }
 
