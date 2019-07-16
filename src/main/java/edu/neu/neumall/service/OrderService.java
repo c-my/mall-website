@@ -25,7 +25,7 @@ public class OrderService {
     }
 
     @Data
-    static class OrderForm {
+    public static class OrderForm {
         @JsonAlias("user_id")
         private final long userID;
 

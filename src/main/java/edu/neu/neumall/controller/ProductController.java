@@ -4,7 +4,6 @@ import edu.neu.neumall.entity.Category;
 import edu.neu.neumall.entity.Product;
 import edu.neu.neumall.entity.User;
 import edu.neu.neumall.form.ProductUpdateForm;
-import edu.neu.neumall.form.RegistrationForm;
 import edu.neu.neumall.repository.CategoryRepository;
 import edu.neu.neumall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
