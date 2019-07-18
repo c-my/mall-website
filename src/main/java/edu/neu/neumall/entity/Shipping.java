@@ -121,4 +121,8 @@ public class Shipping {
     public void setOwner(User owner) {
         this.owner = owner;
     }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 }
