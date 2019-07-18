@@ -23,11 +23,11 @@ public class ImageFileService {
         if (file.isEmpty() || file.getOriginalFilename().contains("..")) {
             return "";
         }
-        String sufix = FilenameUtils.getExtension(file.getOriginalFilename());
+        String suffix = FilenameUtils.getExtension(file.getOriginalFilename());
         String fileName = String.valueOf(System.currentTimeMillis())
                 + RandomStringUtils.randomAlphanumeric(10)
                 + "."
-                + sufix;
+                + suffix;
 
         try (InputStream inputStream = file.getInputStream()) {
             File target = new File(staticRoot + fileName);
