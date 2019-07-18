@@ -75,6 +75,21 @@ public class User implements UserDetails {
         return role;
     }
 
+    public List<Shipping> getShippingList() {
+        return shippingList;
+    }
+
+    /**
+     * @param shippingList
+     */
+    public void setShippingList(List<Shipping> shippingList) {
+        this.shippingList = shippingList;
+    }
+
+    public void addShipping(Shipping shipping) {
+        this.shippingList.add(shipping);
+    }
+
     public static enum UserRole {
         CUSTOMER, SHOPKEEPER, ADMIN, NONE
     }
