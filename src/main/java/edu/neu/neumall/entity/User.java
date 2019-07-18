@@ -197,4 +197,11 @@ public class User implements UserDetails {
         this.nickName = nickName;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof User) {
+            return this.getUserID() == ((User) o).userID;
+        }
+        return false;
+    }
 }

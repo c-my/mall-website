@@ -5,10 +5,7 @@ import edu.neu.neumall.entity.User;
 import edu.neu.neumall.repository.ShippingRepository;
 import edu.neu.neumall.service.ShippingService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +36,16 @@ public class ShippingController {
         Shipping shipping = ShippingService.toShipping(form);
         shipping.setOwner(user);
         shippingRepository.save(shipping);
+        return "{\"success\":true}";
+    }
+
+    @DeleteMapping
+    public String removeShipping(int shippingID, @AuthenticationPrincipal User user) {
+        var shipOpt = shippingRepository.findById(shippingID);
+        if (shipOpt.isEmpty() || !shipOpt.get().getOwner().equals(user)) {
+            return "{\"success\":false}";
+        }
+        shippingRepository.deleteById(shipOpt.get().getShippingID());
         return "{\"success\":true}";
     }
 }
