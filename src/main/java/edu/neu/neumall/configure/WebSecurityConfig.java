@@ -8,6 +8,7 @@ import edu.neu.neumall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -53,7 +54,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/css/**", "/js/**", "/product", "favicon.ico", "/register", "/login").permitAll()
+                .antMatchers("/img/**","/css/**", "/js/**", "/product", "favicon.ico", "/register", "/login").permitAll()
+                .antMatchers("/img/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/img/**").hasRole("SHOPKEEPER")
 //                .antMatchers("/product/purchase").hasRole("CUSTOMER")
 //                .anyRequest().authenticated()
 
