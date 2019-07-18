@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/img")
+@RequestMapping("/image")
 public class ImageController {
 
     private ImageFileService imageFileService;
