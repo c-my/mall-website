@@ -91,7 +91,12 @@ public class ProductController {
     }
 
     @DeleteMapping
-    public String deleteProduct(long productid) {
+    public String deleteProduct(long productid
+            , @AuthenticationPrincipal User owner) {
+        var product = productService.getProductByID(productid);
+        if (product.isEmpty() || !product.get().getOwner().equals(owner)) {
+            return "{\"success\":\"false\"}";
+        }
         productService.deleteProduct(productid);
         return "{\"success\":\"true\"}";
     }

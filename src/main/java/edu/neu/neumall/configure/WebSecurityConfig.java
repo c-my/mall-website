@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/img/**","/css/**", "/js/**", "/product", "favicon.ico", "/register", "/login").permitAll()
-//                .antMatchers("/img/**").permitAll()
+                .antMatchers("/shipping/**").hasAnyRole("CUSTOMER", "SHOPKEEPER")
 //                .antMatchers(HttpMethod.POST, "/img/**").hasRole("SHOPKEEPER")
 //                .antMatchers("/product/purchase").hasRole("CUSTOMER")
 //                .anyRequest().authenticated()
