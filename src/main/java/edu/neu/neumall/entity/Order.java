@@ -26,6 +26,12 @@ public class Order {
     @NotNull
     private Product product_id;
 
+    @Column(name = "deal_count")
+    private int count;
+
+    @Column(name = "deal_price")
+    private double price;
+
     @NotNull
     @Enumerated(value = EnumType.STRING)
     private OrderType orderType;
