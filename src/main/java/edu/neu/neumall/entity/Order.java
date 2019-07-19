@@ -28,7 +28,7 @@ public class Order {
 
     @NotNull
     @Enumerated(value = EnumType.STRING)
-    private OrderType orderTYpe;
+    private OrderType orderType;
 
     @CreationTimestamp
     private Date create_time;

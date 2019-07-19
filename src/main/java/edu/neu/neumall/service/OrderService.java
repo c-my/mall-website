@@ -37,7 +37,7 @@ public class OrderService {
     public Order toOrder(OrderForm form) {
         Order order = new Order();
         try {
-            order.setOrderTYpe(Order.OrderType.valueOf(form.orderType));
+            order.setOrderType(Order.OrderType.valueOf(form.orderType));
         } catch (IllegalArgumentException e) {
             return null;
         }
