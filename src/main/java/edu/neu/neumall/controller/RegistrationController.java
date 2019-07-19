@@ -30,7 +30,7 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String processRegistration(UserService.UserRegisterationForm form) {
+    public String processRegistration(UserService.UserRegistrationForm form) {
         var user = userRepository.findByPhone(form.getPhone());
         if (user.isEmpty()) {
             userRepository.save(userService.toUser(form, bCryptPasswordEncoder));

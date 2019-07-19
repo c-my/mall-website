@@ -1,6 +1,5 @@
 package edu.neu.neumall.controller;
 
-import edu.neu.neumall.entity.Order;
 import edu.neu.neumall.entity.User;
 import edu.neu.neumall.repository.OrderRepository;
 import edu.neu.neumall.service.OrderService;

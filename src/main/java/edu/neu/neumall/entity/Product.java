@@ -52,7 +52,7 @@ public class Product {
     private String main_img = "";
 
     @NotNull
-    @Column(name = "product_desciption")
+    @Column(name = "product_description")
     private String description;
 
     @OneToMany(mappedBy = "product_id")

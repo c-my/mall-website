@@ -47,7 +47,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Data
-    public static class UserRegisterationForm {
+    public static class UserRegistrationForm {
         private String nickname;
         private String password;
         private String phone;
@@ -57,7 +57,7 @@ public class UserService implements UserDetailsService {
         private String role;
     }
 
-    public User toUser(UserRegisterationForm form, PasswordEncoder passwordEncoder) {
+    public User toUser(UserRegistrationForm form, PasswordEncoder passwordEncoder) {
         User user = new User();
         user.setPassword(passwordEncoder.encode(form.password));
         user.setNickName(form.nickname);
