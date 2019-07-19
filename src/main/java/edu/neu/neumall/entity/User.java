@@ -53,8 +53,8 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "owner")
     private List<Product> productList;
 
-    @OneToMany(mappedBy = "owner")
-    private List<Shipping> shippingList;
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    private List<Shipping> shippingList = new ArrayList<>();
 
     @ManyToMany
     private Set<Product> purchaseList;

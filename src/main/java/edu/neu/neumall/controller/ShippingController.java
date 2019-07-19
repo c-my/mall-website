@@ -21,7 +21,8 @@ public class ShippingController {
     }
 
     @GetMapping
-    public List<Shipping> getShipping(@AuthenticationPrincipal User user) {
+    public @ResponseBody
+    Iterable<Shipping> getShipping(@AuthenticationPrincipal User user) {
         if (user == null) {
             return new ArrayList<>();
         }
