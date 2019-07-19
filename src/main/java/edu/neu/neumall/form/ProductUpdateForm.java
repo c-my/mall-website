@@ -13,6 +13,7 @@ public class ProductUpdateForm {
     private double price;
     private String categoryname;
     private String status;
+    private String main_img;
 
     public Product toProduct() {
         Product product = new Product();
@@ -26,6 +27,7 @@ public class ProductUpdateForm {
         product.setDescription(description);
         product.setCategory(category);
         product.setStatusByName(status);
+        product.setMain_img(main_img);
 
         return product;
     }

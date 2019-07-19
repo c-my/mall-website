@@ -87,6 +87,7 @@ public class ProductService {
         private double price;
         private String categoryname;
         private String status;
+        private String main_img;
     }
 
     public static Product toProduct(ProductUpdateForm form) {
@@ -96,6 +97,7 @@ public class ProductService {
         product.setCount(form.getCount());
         product.setPrice(form.getPrice());
         product.setStatusByName(form.getStatus());
+        product.setMain_img(form.main_img);
         return product;
     }
 }
