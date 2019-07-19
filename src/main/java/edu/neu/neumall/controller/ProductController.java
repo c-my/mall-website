@@ -50,8 +50,7 @@ public class ProductController {
     }
 
 
-    @PostMapping
-    @PutMapping
+    @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
     public String addNewGoods(ProductUpdateForm form,
                               @AuthenticationPrincipal User owner) {
         Product g = form.toProduct();
