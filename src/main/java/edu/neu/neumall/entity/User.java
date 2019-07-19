@@ -3,7 +3,6 @@ package edu.neu.neumall.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -79,9 +78,6 @@ public class User implements UserDetails {
         return shippingList;
     }
 
-    /**
-     * @param shippingList
-     */
     public void setShippingList(List<Shipping> shippingList) {
         this.shippingList = shippingList;
     }
@@ -90,7 +86,7 @@ public class User implements UserDetails {
         this.shippingList.add(shipping);
     }
 
-    public static enum UserRole {
+    public enum UserRole {
         CUSTOMER, SHOPKEEPER, ADMIN, NONE
     }
 
@@ -137,7 +133,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority(role.name()));
+        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
     }
 
     public String getPassword() {

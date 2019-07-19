@@ -1,6 +1,7 @@
 package edu.neu.neumall.controller;
 
 import edu.neu.neumall.entity.User;
+import edu.neu.neumall.repository.OrderRepository;
 import edu.neu.neumall.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order")
 public class OrderController {
 
-    private OrderService orderService;
+    private final OrderRepository orderRepository;
 
     @Autowired
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
+    public OrderController(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
     @PostMapping
@@ -27,6 +28,6 @@ public class OrderController {
 
     @GetMapping
     public void getOrder() {
-
+        orderRepository.findAll();
     }
 }

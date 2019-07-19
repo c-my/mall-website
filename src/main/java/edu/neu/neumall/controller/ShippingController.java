@@ -14,14 +14,14 @@ import java.util.List;
 @RequestMapping("/shipping")
 public class ShippingController {
 
-    private ShippingRepository shippingRepository;
+    private final ShippingRepository shippingRepository;
 
     public ShippingController(ShippingRepository shippingRepository) {
         this.shippingRepository = shippingRepository;
     }
 
     @GetMapping
-    public List<Shipping> getShippings(@AuthenticationPrincipal User user) {
+    public List<Shipping> getShipping(@AuthenticationPrincipal User user) {
         if (user == null) {
             return new ArrayList<>();
         }
@@ -29,7 +29,7 @@ public class ShippingController {
     }
 
     @PostMapping
-    public String appendShipping(ShippingService.ShippingForm form, @AuthenticationPrincipal User user) throws NoSuchMethodException {
+    public String appendShipping(ShippingService.ShippingForm form, @AuthenticationPrincipal User user) {
         if (user == null) {
             return "not login";
         }
@@ -46,6 +46,7 @@ public class ShippingController {
             return "{\"success\":false}";
         }
         shippingRepository.deleteById(shipOpt.get().getShippingID());
+
         return "{\"success\":true}";
     }
 }

@@ -18,8 +18,8 @@ import java.util.Optional;
 @Service
 public class UserService implements UserDetailsService {
 
-    private UserRepository userRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserService(@Qualifier("userRepository") UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {

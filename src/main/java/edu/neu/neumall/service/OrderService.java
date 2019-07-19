@@ -11,15 +11,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
-    private OrderRepository orderRepository;
 
-    private UserRepository userRepository;
-    private ProductRepository productRepository;
+    private final UserRepository userRepository;
+    private final ProductRepository productRepository;
 
     public OrderService(OrderRepository orderRepository,
                         @Qualifier("userRepository") UserRepository userRepository,
                         ProductRepository productRepository) {
-        this.orderRepository = orderRepository;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
     }

@@ -36,11 +36,11 @@ public class Order {
     @UpdateTimestamp
     private Date update_time;
 
-    public static enum OrderStatus {
+    public enum OrderStatus {
         FINISHED
     }
 
-    public static enum OrderType {
+    public enum OrderType {
         PURCHASE, REFUND
     }
 }

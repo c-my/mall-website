@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/image")
 public class ImageController {
 
-    private ImageFileService imageFileService;
+    private final ImageFileService imageFileService;
 
     public ImageController(ImageFileService imageFileService) {
         this.imageFileService = imageFileService;

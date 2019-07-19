@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service("productService")
 public class ProductService {
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
     public ProductService(ProductRepository productRepository) {

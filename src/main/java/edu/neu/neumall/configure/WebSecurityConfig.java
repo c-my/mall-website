@@ -6,34 +6,29 @@ import edu.neu.neumall.handler.AuthSuccessHandler;
 import edu.neu.neumall.handler.ContentAccessDeniedHandler;
 import edu.neu.neumall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private UserService userService;
+    private final UserService userService;
 
-    private AuthSuccessHandler authSuccessHandler;
+    private final AuthSuccessHandler authSuccessHandler;
 
-    private AuthFailureHandler authFailureHandler;
+    private final AuthFailureHandler authFailureHandler;
 
-    private ContentAccessDeniedHandler contentAccessDeniedHandler;
+    private final ContentAccessDeniedHandler contentAccessDeniedHandler;
 
-    private AuthEntryPoint authEntryPoint;
+    private final AuthEntryPoint authEntryPoint;
 
 
     @Autowired

@@ -25,8 +25,7 @@ public class UserController {
     @PostMapping("add")
     public @ResponseBody
     String addNewUser(@RequestBody User user) {
-        User u = user;
-        userRepository.save(u);
+        userRepository.save(user);
         return "user added";
     }
 }

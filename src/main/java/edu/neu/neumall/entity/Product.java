@@ -64,7 +64,7 @@ public class Product {
     @UpdateTimestamp
     private Date update_time;
 
-    public static enum ProductStatus {
+    public enum ProductStatus {
         ONSALE, OFFSALE
     }
 
