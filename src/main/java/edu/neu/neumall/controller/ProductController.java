@@ -81,6 +81,7 @@ public class ProductController {
         dstProduct.setDescription(form.getDescription());
         dstProduct.setCount(form.getCount());
         dstProduct.setPrice(form.getPrice());
+        dstProduct.setStatusByName(form.getStatus());
         dstProduct.setOwner(owner);
 
         var category = getCategory(form.getCategoryname(), categoryRepository);

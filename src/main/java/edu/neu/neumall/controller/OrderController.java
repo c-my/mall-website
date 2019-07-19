@@ -27,6 +27,7 @@ public class OrderController {
     @PostMapping
     public String addOrder(OrderService.OrderForm form,
                            @AuthenticationPrincipal User user) {
+        form.setUserID(user.getUserID());
         var orderID = orderService.purchase(form);
         return "{\"order_id\":" + orderID + "}";
     }

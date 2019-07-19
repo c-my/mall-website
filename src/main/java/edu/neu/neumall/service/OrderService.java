@@ -30,6 +30,7 @@ public class OrderService {
 
     public long purchase(OrderForm form) {
         if (!canPurchase(form)) {
+            System.out.println("cannot pruchase");
             return -1;
         }
         return processPurchase(form);
@@ -42,7 +43,7 @@ public class OrderService {
 
         //if user not exists or user is not a customer
         var userExist = userRepository.findById(userID);
-        if (userExist.isEmpty() || userExist.get().getRole() != User.UserRole.CUSTOMER) {
+        if (userExist.isEmpty() || !userExist.get().getRole().equals(User.UserRole.CUSTOMER)) {
             return false;
         }
 
@@ -84,16 +85,16 @@ public class OrderService {
     @Data
     public static class OrderForm {
         @JsonAlias("user_id")
-        private final long userID;
+        private long userID;
 
         @JsonAlias("product_id")
-        private final long productID;
+        private long productID;
 
         @JsonAlias("order_type")
-        private final String orderType;
+        private String orderType;
 
         @JsonAlias("order_count")
-        private final int orderCount;
+        private int orderCount;
     }
 
     private Order toOrder(OrderForm form) throws Exception {
