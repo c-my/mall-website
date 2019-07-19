@@ -1,5 +1,6 @@
 package edu.neu.neumall.controller;
 
+import edu.neu.neumall.entity.Category;
 import edu.neu.neumall.entity.Product;
 import edu.neu.neumall.entity.User;
 import edu.neu.neumall.form.ProductUpdateForm;
@@ -50,20 +51,39 @@ public class ProductController {
     }
 
 
-    @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT})
+    @PostMapping
     public String addNewGoods(ProductUpdateForm form,
                               @AuthenticationPrincipal User owner) {
         Product g = form.toProduct();
         g.setOwner(owner);
 
         var categoryName = g.getCategoryName();
-        var category = categoryRepository.findByCategoryName(categoryName);
-        if (category == null) {
-            categoryRepository.save(g.getCategory());
-        }
-        category = categoryRepository.findByCategoryName(categoryName);
+        var category = getCategory(categoryName, this.categoryRepository);
         g.setCategory(category);
-        productService.addProduct(g);
+        long productID = productService.addProduct(g).getProductID();
+        return "{\"productid\":" + productID + "}";
+    }
+
+    @PutMapping
+    public String updateGoodsByID(ProductService.ProductUpdateForm form
+            , @AuthenticationPrincipal User owner) {
+        var productExits = productService.getProductByID(form.getProductid());
+        if (productExits.isEmpty()) {
+            return "{\"success\":\"false\"}";
+        }
+        var srcProduct = ProductService.toProduct(form);
+        var dstProduct = productExits.get();
+
+        dstProduct.setName(form.getProductname());
+        dstProduct.setDescription(form.getDescription());
+        dstProduct.setCount(form.getCount());
+        dstProduct.setPrice(form.getPrice());
+        dstProduct.setOwner(owner);
+
+        var category = getCategory(form.getCategoryname(), categoryRepository);
+        dstProduct.setCategory(category);
+
+        productService.addProduct(dstProduct);
         return "{\"success\":\"true\"}";
     }
 
@@ -71,5 +91,16 @@ public class ProductController {
     public String deleteProduct(long productid) {
         productService.deleteProduct(productid);
         return "{\"success\":\"true\"}";
+    }
+
+    private Category getCategory(String categoryName, CategoryRepository categoryRepository) {
+        var categoryExists = categoryRepository.findByCategoryName(categoryName);
+        if (categoryExists.isEmpty()) {
+            Category category = new Category();
+            category.setCategoryName(categoryName);
+            categoryRepository.save(category);
+        }
+        return categoryRepository.findByCategoryName(categoryName).get();
+
     }
 }

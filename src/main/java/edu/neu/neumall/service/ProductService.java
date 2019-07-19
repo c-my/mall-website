@@ -2,11 +2,13 @@ package edu.neu.neumall.service;
 
 import edu.neu.neumall.entity.Product;
 import edu.neu.neumall.repository.ProductRepository;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service("productService")
 public class ProductService {
@@ -62,11 +64,36 @@ public class ProductService {
         return productRepository.findByCategory_CategoryName(category);
     }
 
-    public void addProduct(Product product) {
-        productRepository.save(product);
+    public Product addProduct(Product product) {
+        return productRepository.save(product);
     }
 
-    public void deleteProduct(long id){
+    public void deleteProduct(long id) {
         productRepository.deleteByProductID(id);
+    }
+
+    public Optional<Product> getProductByID(long id) {
+        return productRepository.findById(id);
+    }
+
+    @Data
+    public static class ProductUpdateForm {
+        private long productid;
+        private String productname;
+        private String description;
+        private int count;
+        private double price;
+        private String categoryname;
+        private String status;
+    }
+
+    public static Product toProduct(ProductUpdateForm form) {
+        Product product = new Product();
+        product.setName(form.getProductname());
+        product.setDescription(form.getDescription());
+        product.setCount(form.getCount());
+        product.setPrice(form.getPrice());
+        product.setStatusByName(form.getStatus());
+        return product;
     }
 }
