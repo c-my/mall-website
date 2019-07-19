@@ -64,9 +64,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(authSuccessHandler)
                 .permitAll()
 
+
                 .usernameParameter("username").passwordParameter("password")
 
-                .and().logout().permitAll();
+                .and().logout().logoutUrl("/logout").permitAll();
 
         http.exceptionHandling()
                 .accessDeniedHandler(contentAccessDeniedHandler)
