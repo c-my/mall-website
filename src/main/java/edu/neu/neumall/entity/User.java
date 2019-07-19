@@ -1,5 +1,6 @@
 package edu.neu.neumall.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,6 +14,7 @@ import java.util.*;
 
 @Entity
 @Access(AccessType.FIELD)
+
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,6 +55,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "owner")
     private List<Product> productList;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private List<Shipping> shippingList = new ArrayList<>();
 

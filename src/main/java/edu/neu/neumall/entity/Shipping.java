@@ -1,5 +1,6 @@
 package edu.neu.neumall.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,6 +14,7 @@ public class Shipping {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer shippingID;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;
