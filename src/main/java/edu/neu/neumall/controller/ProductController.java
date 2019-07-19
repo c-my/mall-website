@@ -71,8 +71,11 @@ public class ProductController {
         if (productExits.isEmpty()) {
             return "{\"success\":\"false\"}";
         }
-        var srcProduct = ProductService.toProduct(form);
         var dstProduct = productExits.get();
+
+        if (!dstProduct.getOwner().equals(owner)) {
+            return "{\"success\":\"false\"}";
+        }
 
         dstProduct.setName(form.getProductname());
         dstProduct.setDescription(form.getDescription());
