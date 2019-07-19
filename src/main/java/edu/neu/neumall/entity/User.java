@@ -89,6 +89,14 @@ public class User implements UserDetails {
         this.shippingList.add(shipping);
     }
 
+    public Set<Order> getUser_order() {
+        return user_order;
+    }
+
+    public void setUser_order(Set<Order> user_order) {
+        this.user_order = user_order;
+    }
+
     public enum UserRole {
         CUSTOMER, SHOPKEEPER, ADMIN, NONE
     }
