@@ -52,8 +52,8 @@ public class User implements UserDetails {
     private Date update_time;
 
     //sells relation between user and products
-    @OneToMany(mappedBy = "owner")
-    private List<Product> productList;
+    @OneToOne(mappedBy = "owner")
+    private ShoppingCart shoppingCart;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)

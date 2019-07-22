@@ -39,6 +39,10 @@ public class Shipping {
     private String receiverCity;
 
     @NotNull
+    @Column(name = "receiver_district")
+    private String district;
+
+    @NotNull
     @Column(name = "receiver_address")
     private String receiverAddress;
 
@@ -126,5 +130,13 @@ public class Shipping {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
     }
 }

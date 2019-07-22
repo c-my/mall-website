@@ -14,6 +14,7 @@ public class ShippingService {
 
         private final String receiverprovince;
         private final String receivercity;
+        private final String receiverdistrict;
         private final String receiveraddr;
 
         private final String receiverzip;
@@ -27,6 +28,7 @@ public class ShippingService {
         shipping.setReceiverProvince(form.receiverprovince);
         shipping.setReceiverCity(form.receivercity);
         shipping.setReceiverAddress(form.receiveraddr);
+        shipping.setDistrict(form.getReceiverdistrict());
 
         shipping.setReceiverZip(form.receiverzip == null ? "" : form.receiverzip);
         return shipping;

@@ -58,6 +58,9 @@ public class Product {
     @OneToMany(mappedBy = "product_id")
     private Set<Order> product_order;
 
+    @OneToMany(mappedBy = "product")
+    private Set<ShoppingCart> shoppingCartset;
+
     @CreationTimestamp
     private Date create_time;
 
