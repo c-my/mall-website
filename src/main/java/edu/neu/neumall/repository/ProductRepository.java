@@ -23,11 +23,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByCategory_CategoryName(String name);
 
     List<Product> findByPriceBetweenAndCategory_CategoryName(double low, double high, String category);
-
-    @Override
-    Optional<Product> findById(Long aLong);
-
-    Product findByProductID(long id);
-
-    void deleteByProductID(long id);
 }

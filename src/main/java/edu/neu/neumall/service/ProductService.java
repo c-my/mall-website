@@ -71,7 +71,7 @@ public class ProductService {
     }
 
     public void deleteProduct(long id) {
-        productRepository.deleteByProductID(id);
+        productRepository.deleteById(id);
     }
 
     public Optional<Product> getProductByID(long id) {

@@ -60,7 +60,7 @@ public class ProductController {
         var categoryName = g.getCategoryName();
         var category = getCategory(categoryName, this.categoryRepository);
         g.setCategory(category);
-        long productID = productService.addProduct(g).getProductID();
+        long productID = productService.addProduct(g).getID();
         return "{\"productid\":" + productID + "}";
     }
 

@@ -87,7 +87,7 @@ public class OrderService {
         @JsonAlias("owner")
         private long userID;
 
-        @JsonAlias("product_id")
+        @JsonAlias("product")
         private long productID;
 
         @JsonAlias("order_type")
@@ -116,7 +116,7 @@ public class OrderService {
         if (productOption.isEmpty()) {
             return null;
         } else {
-            order.setProduct_id(productOption.get());
+            order.setProduct(productOption.get());
         }
         order.setCount(form.getOrderCount());
 

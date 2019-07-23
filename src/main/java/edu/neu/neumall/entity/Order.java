@@ -24,7 +24,7 @@ public class Order {
     @ManyToOne
     @JoinColumn
     @NotNull
-    private Product product_id;
+    private Product product;
 
     @Column(name = "deal_count")
     private int count;

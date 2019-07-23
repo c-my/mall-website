@@ -12,49 +12,84 @@ import java.util.Set;
 @Entity
 @Access(AccessType.FIELD)
 public class Product {
+    /**
+     * Product's ID, primary key
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
-    private long productID;
+    @Column(name = "id")
+    private long ID;
 
+    /**
+     * Product's name
+     */
+    @NotNull
+    @Column(name = "name")
+    private String name;
+
+    /**
+     * Product's main image
+     */
+    @Column(name = "main_image")
+    private String main_img = "";
+    // TODO: 2019/7/23 add a default image file for product
+
+    /**
+     * Number of product
+     */
+    @NotNull
+    @Column(name = "count")
+    private Integer count;
+
+    /**
+     * Product's price
+     */
+    @NotNull
+    @Column(name = "price", columnDefinition = "DECIMAL(20,2)")
+    private Double price;
+
+    /**
+     * Category of product
+     */
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category")
     @JsonBackReference
     private Category category;
 
+    /**
+     * Detail description of Product
+     */
+    @NotNull
+    @Column(name = "description")
+    private String description;
+
+    /**
+     * Seller of the product
+     */
     @NotNull
     @ManyToOne
     @JoinColumn(name = "owner")
     private User owner;
 
+    /**
+     * Product's Status
+     */
     @NotNull
-    @Column(name = "product_name")
-    private String name;
-
-    @NotNull
-    @Column(name = "product_count")
-    private Integer count;
-
-    @NotNull
-    @Column(name = "product_price", columnDefinition = "DECIMAL(20,2)")
-    private Double price;
-
-    @NotNull
-    @Column(name = "product_status")
+    @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
     private ProductStatus status;
 
-    @Column(name = "main_img")
-    private String main_img = "";
 
-    @NotNull
-    @Column(name = "product_description")
-    private String description;
+    /**
+     * Order relationship with user
+     */
+    @OneToMany(mappedBy = "product")
+    private Set<Order> order;
 
-    @OneToMany(mappedBy = "product_id")
-    private Set<Order> product_order;
-
+    /**
+     * Represent item in shopping cart of user
+     */
     @OneToMany(mappedBy = "product")
     @JsonBackReference
     private Set<ShoppingCart> shoppingCartSet;
@@ -73,8 +108,8 @@ public class Product {
         return count;
     }
 
-    public Long getProductID() {
-        return productID;
+    public Long getID() {
+        return ID;
     }
 
     public String getName() {
@@ -93,8 +128,8 @@ public class Product {
         this.description = description;
     }
 
-    public void setProductID(Long productID) {
-        this.productID = productID;
+    public void setID(Long ID) {
+        this.ID = ID;
     }
 
     public void setName(String name) {
