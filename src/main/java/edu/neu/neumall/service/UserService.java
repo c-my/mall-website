@@ -27,7 +27,7 @@ public class UserService implements UserDetailsService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public User findUserByName(String name) {
+    public Optional<User> findUserByName(String name) {
         return userRepository.findByNickName(name);
     }
 

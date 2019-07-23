@@ -2,7 +2,7 @@ package edu.neu.neumall.controller;
 
 import edu.neu.neumall.entity.ShippingAddr;
 import edu.neu.neumall.entity.User;
-import edu.neu.neumall.repository.ShippingRepository;
+import edu.neu.neumall.repository.ShippingAddrRepository;
 import edu.neu.neumall.service.ShippingService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +13,10 @@ import java.util.ArrayList;
 @RequestMapping("/shipping")
 public class ShippingController {
 
-    private final ShippingRepository shippingRepository;
+    private final ShippingAddrRepository shippingAddrRepository;
 
-    public ShippingController(ShippingRepository shippingRepository) {
-        this.shippingRepository = shippingRepository;
+    public ShippingController(ShippingAddrRepository shippingAddrRepository) {
+        this.shippingAddrRepository = shippingAddrRepository;
     }
 
     @GetMapping
@@ -35,17 +35,17 @@ public class ShippingController {
         }
         ShippingAddr shippingAddr = ShippingService.toShipping(form);
         shippingAddr.setOwner(user);
-        shippingRepository.save(shippingAddr);
+        shippingAddrRepository.save(shippingAddr);
         return "{\"success\":true}";
     }
 
     @DeleteMapping
     public String removeShipping(int shippingID, @AuthenticationPrincipal User user) {
-        var shipOpt = shippingRepository.findById(shippingID);
+        var shipOpt = shippingAddrRepository.findById(shippingID);
         if (shipOpt.isEmpty() || !shipOpt.get().getOwner().equals(user)) {
             return "{\"success\":false}";
         }
-        shippingRepository.deleteById(shipOpt.get().getID());
+        shippingAddrRepository.deleteById(shipOpt.get().getID());
 
         return "{\"success\":true}";
     }
