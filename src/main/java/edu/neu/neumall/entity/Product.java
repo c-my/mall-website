@@ -59,7 +59,8 @@ public class Product {
     private Set<Order> product_order;
 
     @OneToMany(mappedBy = "product")
-    private Set<ShoppingCart> shoppingCartset;
+    @JsonBackReference
+    private Set<ShoppingCart> shoppingCartSet;
 
     @CreationTimestamp
     private Date create_time;

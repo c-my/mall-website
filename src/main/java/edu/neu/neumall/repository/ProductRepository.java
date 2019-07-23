@@ -4,6 +4,7 @@ import edu.neu.neumall.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByPriceBetween(double low, double high);
@@ -22,6 +23,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByCategory_CategoryName(String name);
 
     List<Product> findByPriceBetweenAndCategory_CategoryName(double low, double high, String category);
+
+    @Override
+    Optional<Product> findById(Long aLong);
 
     Product findByProductID(long id);
 
