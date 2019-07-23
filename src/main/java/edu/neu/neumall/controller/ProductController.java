@@ -103,13 +103,13 @@ public class ProductController {
     }
 
     private Category getCategory(String categoryName, CategoryRepository categoryRepository) {
-        var categoryExists = categoryRepository.findByCategoryName(categoryName);
+        var categoryExists = categoryRepository.findByName(categoryName);
         if (categoryExists.isEmpty()) {
             Category category = new Category();
-            category.setCategoryName(categoryName);
+            category.setName(categoryName);
             categoryRepository.save(category);
         }
-        return categoryRepository.findByCategoryName(categoryName).get();
+        return categoryRepository.findByName(categoryName).get();
 
     }
 }

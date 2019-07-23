@@ -8,13 +8,19 @@ import java.util.List;
 @Entity
 public class Category {
 
+    /**
+     * Primary key
+     */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "category_id")
-    private Integer categoryID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer ID;
 
-    @Column(name = "category_name")
-    private String categoryName;
+    /**
+     * Category's human friendly name
+     */
+    @Column(name = "name")
+    private String name;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "category")
@@ -28,20 +34,20 @@ public class Category {
         this.goods = goods;
     }
 
-    public Integer getCategoryID() {
-        return categoryID;
+    public Integer getID() {
+        return ID;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getName() {
+        return name;
     }
 
-    public void setCategoryID(Integer categoryID) {
-        this.categoryID = categoryID;
+    public void setID(Integer ID) {
+        this.ID = ID;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

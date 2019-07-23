@@ -43,7 +43,7 @@ public class ProductService {
 
     public List<Product> getProductByPriceRangeAndCategory(String low, String high, String category) {
         if (high.equals("0")) {
-            return productRepository.findByPriceGreaterThanEqualAndCategory_CategoryName(Double.parseDouble(low), category);
+            return productRepository.findByPriceGreaterThanEqualAndCategory_Name(Double.parseDouble(low), category);
         } else {
             double lowPrice = Double.parseDouble(low);
             double highPrice = Double.parseDouble(high);
@@ -56,14 +56,14 @@ public class ProductService {
         if (low > high) {
             return new ArrayList<>();
         } else if (low != high) {
-            return productRepository.findByPriceBetweenAndCategory_CategoryName(low, high, category);
+            return productRepository.findByPriceBetweenAndCategory_Name(low, high, category);
         } else {
-            return productRepository.findByPriceAndCategory_CategoryName(low, category);
+            return productRepository.findByPriceAndCategory_Name(low, category);
         }
     }
 
     public List<Product> getProductByCategoryName(String category) {
-        return productRepository.findByCategory_CategoryName(category);
+        return productRepository.findByCategory_Name(category);
     }
 
     public Product addProduct(Product product) {

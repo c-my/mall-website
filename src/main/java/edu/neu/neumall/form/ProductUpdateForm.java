@@ -19,7 +19,7 @@ public class ProductUpdateForm {
         Product product = new Product();
 
         Category category = new Category();
-        category.setCategoryName(categoryname);
+        category.setName(categoryname);
 
         product.setName(productname);
         product.setCount(count);

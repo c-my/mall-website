@@ -11,16 +11,16 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByPrice(double price);
 
-    List<Product> findByPriceAndCategory_CategoryName(double price, String category);
+    List<Product> findByPriceAndCategory_Name(double price, String category);
 
     List<Product> findByPriceGreaterThanEqual(double price);
 
-    List<Product> findByPriceGreaterThanEqualAndCategory_CategoryName(double price, String category);
+    List<Product> findByPriceGreaterThanEqualAndCategory_Name(double price, String category);
 
 
     List<Product> findByPriceLessThanEqual(double price);
 
-    List<Product> findByCategory_CategoryName(String name);
+    List<Product> findByCategory_Name(String name);
 
-    List<Product> findByPriceBetweenAndCategory_CategoryName(double low, double high, String category);
+    List<Product> findByPriceBetweenAndCategory_Name(double low, double high, String category);
 }

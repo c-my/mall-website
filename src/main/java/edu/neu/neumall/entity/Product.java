@@ -186,7 +186,7 @@ public class Product {
     }
 
     public String getCategoryName() {
-        return this.category.getCategoryName();
+        return this.category.getName();
     }
 
     public void setStatusByName(String status) {
