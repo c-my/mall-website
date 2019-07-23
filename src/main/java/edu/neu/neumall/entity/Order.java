@@ -19,7 +19,7 @@ public class Order {
     @ManyToOne
     @JoinColumn
     @NotNull
-    private User user_id;
+    private User owner;
 
     @ManyToOne
     @JoinColumn

@@ -16,7 +16,7 @@ public class Shipping {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "owner")
     private User owner;
 
     @NotNull

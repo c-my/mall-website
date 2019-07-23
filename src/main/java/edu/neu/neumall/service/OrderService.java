@@ -84,7 +84,7 @@ public class OrderService {
 
     @Data
     public static class OrderForm {
-        @JsonAlias("user_id")
+        @JsonAlias("owner")
         private long userID;
 
         @JsonAlias("product_id")
@@ -109,7 +109,7 @@ public class OrderService {
         if (userOption.isEmpty()) {
             throw new Exception("user not find when cast orderform to order");
         } else {
-            order.setUser_id(userOption.get());
+            order.setOwner(userOption.get());
         }
 
         var productOption = productRepository.findById(form.productID);

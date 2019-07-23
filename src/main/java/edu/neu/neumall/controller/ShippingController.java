@@ -25,7 +25,7 @@ public class ShippingController {
         if (user == null) {
             return new ArrayList<>();
         }
-        return user.getShippingList();
+        return user.getShippingAddrList();
     }
 
     @PostMapping

@@ -28,9 +28,6 @@ public class Product {
     @JoinColumn(name = "owner")
     private User owner;
 
-    @ManyToMany
-    private Set<User> buyer;
-
     @NotNull
     @Column(name = "product_name")
     private String name;

@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface ShoppingCartRepository extends CrudRepository<ShoppingCart, Long> {
 
-    public List<ShoppingCart> findAllByOwner_UserID(long id);
+    public List<ShoppingCart> findAllByOwner_ID(long id);
 
-    public List<ShoppingCart> removeByOwner_UserID(long id);
+    public List<ShoppingCart> removeByOwner_ID(long id);
 }

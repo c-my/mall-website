@@ -15,35 +15,63 @@ import java.util.*;
 
 @Entity
 @Access(AccessType.FIELD)
-
 public class User implements UserDetails {
+    //User id, primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private long userID;
+    @Column(name = "id")
+    private long ID;
 
+    //User's nickname, need not unique
     @NotNull
-    @Column(name = "nick_name")
+    @Column(name = "nickname")
     private String nickName;
 
+    /**
+     * User's avatar
+     */
     @NotNull
-    @Column(name = "user_password")
+    @Column(name = "avatar")
+    private String avatar = "/img/default_avatar.jpg";
+    // TODO: 2019/7/23 add a default_avatar file in static file folder
+
+    /**
+     * User's password, after encrypted
+     * Will not shown in json
+     */
+    @NotNull
+    @Column(name = "password")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @Column(name = "user_phone", unique = true)
+    /**
+     * User's phone, require unique
+     * and as the identity when login
+     */
+    @Column(name = "phone", unique = true)
     @NotNull
     private String phone;
 
-    @Column(name = "user_email", unique = true)
+
+    /**
+     * User's email, unique required
+     */
+    @Column(name = "email", unique = true)
     private String email;
 
+
+    /**
+     * User's reset-password question
+     */
     @NotNull
-    @Column(name = "user_question")
+    @Column(name = "question")
     private String question;
 
+    /**
+     * User's reset-password answer
+     */
     @NotNull
-    @Column(name = "user_answer")
+    @Column(name = "answer")
     private String answer;
 
     @CreationTimestamp
@@ -52,21 +80,23 @@ public class User implements UserDetails {
     @UpdateTimestamp
     private Date update_time;
 
-    //sells relation between user and products
+    /**
+     * User's shopping cart
+     */
     @OneToOne(mappedBy = "owner")
     @JsonBackReference
     private ShoppingCart shoppingCart;
 
+    /**
+     * User's shipping address list
+     */
     @JsonManagedReference
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    private List<Shipping> shippingList = new ArrayList<>();
-
-    @ManyToMany
-    private Set<Product> purchaseList;
+    private List<Shipping> shippingAddrList = new ArrayList<>();
 
     @JsonBackReference
-    @OneToMany(mappedBy = "user_id")
-    private Set<Order> user_order;
+    @OneToMany(mappedBy = "owner")
+    private Set<Order> order;
 
     @NotNull
     @Enumerated(value = EnumType.STRING)
@@ -80,24 +110,40 @@ public class User implements UserDetails {
         return role;
     }
 
-    public List<Shipping> getShippingList() {
-        return shippingList;
+    public List<Shipping> getShippingAddrList() {
+        return shippingAddrList;
     }
 
-    public void setShippingList(List<Shipping> shippingList) {
-        this.shippingList = shippingList;
+    public void setShippingAddrList(List<Shipping> shippingAddrList) {
+        this.shippingAddrList = shippingAddrList;
     }
 
     public void addShipping(Shipping shipping) {
-        this.shippingList.add(shipping);
+        this.shippingAddrList.add(shipping);
     }
 
-    public Set<Order> getUser_order() {
-        return user_order;
+    public Set<Order> getOrder() {
+        return order;
     }
 
-    public void setUser_order(Set<Order> user_order) {
-        this.user_order = user_order;
+    public void setOrder(Set<Order> order) {
+        this.order = order;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public enum UserRole {
@@ -105,12 +151,12 @@ public class User implements UserDetails {
     }
 
 
-    public long getUserID() {
-        return userID;
+    public long getID() {
+        return ID;
     }
 
-    public void setUserID(long userID) {
-        this.userID = userID;
+    public void setID(long ID) {
+        this.ID = ID;
     }
 
     public String getEmail() {
@@ -210,7 +256,7 @@ public class User implements UserDetails {
     @Override
     public boolean equals(Object o) {
         if (o instanceof User) {
-            return this.getUserID() == ((User) o).userID;
+            return this.getID() == ((User) o).ID;
         }
         return false;
     }

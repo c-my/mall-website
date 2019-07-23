@@ -29,11 +29,11 @@ public class ShoppingCartService {
     }
 
     public List<ShoppingCart> getShoppingCart(User user) {
-        return shoppingCartRepository.findAllByOwner_UserID(user.getUserID());
+        return shoppingCartRepository.findAllByOwner_ID(user.getID());
     }
 
     public List<ShoppingCart> removeShoppingCart(User user) {
-        return shoppingCartRepository.removeByOwner_UserID(user.getUserID());
+        return shoppingCartRepository.removeByOwner_ID(user.getID());
     }
 
     public void add(ShoppingCart shoppingCart) {
