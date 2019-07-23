@@ -1,5 +1,6 @@
 package edu.neu.neumall.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
@@ -17,7 +18,7 @@ import java.util.*;
 
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long userID;
 
@@ -53,6 +54,7 @@ public class User implements UserDetails {
 
     //sells relation between user and products
     @OneToOne(mappedBy = "owner")
+    @JsonBackReference
     private ShoppingCart shoppingCart;
 
     @JsonManagedReference
@@ -62,6 +64,7 @@ public class User implements UserDetails {
     @ManyToMany
     private Set<Product> purchaseList;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "user_id")
     private Set<Order> user_order;
 
