@@ -74,7 +74,7 @@ public class OrderService {
             var price = product.getPrice();
             order.setPrice(price);
 
-            var orderID = orderRepository.save(order).getOrder_id();
+            var orderID = orderRepository.save(order).getID();
             return orderID;
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,7 +100,7 @@ public class OrderService {
     private Order toOrder(OrderForm form) throws Exception {
         Order order = new Order();
         try {
-            order.setOrderType(Order.OrderType.valueOf(form.orderType));
+            order.setType(Order.OrderType.valueOf(form.orderType));
         } catch (IllegalArgumentException e) {
             return null;
         }

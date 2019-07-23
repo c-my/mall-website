@@ -12,29 +12,50 @@ import java.util.Date;
 @Entity
 @Table(name = "OrderTable")
 public class Order {
+    /**
+     * Primary key
+     */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    long order_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    long ID;
 
+    /**
+     * User attached to order
+     */
     @ManyToOne
     @JoinColumn
     @NotNull
     private User owner;
 
+    /**
+     * Product attached to order
+     */
     @ManyToOne
     @JoinColumn
     @NotNull
     private Product product;
 
-    @Column(name = "deal_count")
+    /**
+     * Number of product in order
+     */
+    @Column(name = "count")
     private int count;
 
-    @Column(name = "deal_price")
+    /**
+     * Price of product in order
+     */
+    @Column(name = "price")
     private double price;
 
+    /**
+     * Order's type:
+     *          PURCHASE/REFUND
+     */
     @NotNull
     @Enumerated(value = EnumType.STRING)
-    private OrderType orderType;
+    @Column(name = "type")
+    private OrderType type;
 
     @CreationTimestamp
     private Date create_time;
