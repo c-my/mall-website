@@ -30,8 +30,9 @@ public class Product {
     /**
      * Product's main image
      */
-    @Column(name = "main_image")
-    private String main_img = "";
+    @NotNull
+    @Column(name = "main_image", columnDefinition = "varchar(50) default 'img/default_product_img.jpg'")
+    private String main_img = "varchar(50) default 'img/default_product_img.jpg";
     // TODO: 2019/7/23 add a default image file for product
 
     /**

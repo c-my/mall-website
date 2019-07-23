@@ -31,7 +31,7 @@ public class User implements UserDetails {
      * User's avatar
      */
     @NotNull
-    @Column(name = "avatar")
+    @Column(name = "avatar", columnDefinition = "varchar(50) default '/img/default_avatar.jpg'")
     private String avatar = "/img/default_avatar.jpg";
     // TODO: 2019/7/23 add a default_avatar file in static file folder
 
