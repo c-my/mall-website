@@ -1,6 +1,6 @@
 package edu.neu.neumall.service;
 
-import edu.neu.neumall.entity.Shipping;
+import edu.neu.neumall.entity.ShippingAddr;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +20,17 @@ public class ShippingService {
         private final String receiverzip;
     }
 
-    public static Shipping toShipping(ShippingForm form) {
-        Shipping shipping = new Shipping();
-        shipping.setReceiverName(form.receivername);
-        shipping.setReceiverPhone(form.receiverphone);
+    public static ShippingAddr toShipping(ShippingForm form) {
+        ShippingAddr shippingAddr = new ShippingAddr();
+        shippingAddr.setReceiverName(form.receivername);
+        shippingAddr.setReceiverPhone(form.receiverphone);
 
-        shipping.setReceiverProvince(form.receiverprovince);
-        shipping.setReceiverCity(form.receivercity);
-        shipping.setReceiverAddress(form.receiveraddr);
-        shipping.setDistrict(form.getReceiverdistrict());
+        shippingAddr.setReceiverProvince(form.receiverprovince);
+        shippingAddr.setReceiverCity(form.receivercity);
+        shippingAddr.setReceiverAddress(form.receiveraddr);
+        shippingAddr.setDistrict(form.getReceiverdistrict());
 
-        shipping.setReceiverZip(form.receiverzip == null ? "" : form.receiverzip);
-        return shipping;
+        shippingAddr.setReceiverZip(form.receiverzip == null ? "" : form.receiverzip);
+        return shippingAddr;
     }
 }

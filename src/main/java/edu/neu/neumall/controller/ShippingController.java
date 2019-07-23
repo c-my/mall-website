@@ -1,6 +1,6 @@
 package edu.neu.neumall.controller;
 
-import edu.neu.neumall.entity.Shipping;
+import edu.neu.neumall.entity.ShippingAddr;
 import edu.neu.neumall.entity.User;
 import edu.neu.neumall.repository.ShippingRepository;
 import edu.neu.neumall.service.ShippingService;
@@ -21,11 +21,11 @@ public class ShippingController {
 
     @GetMapping
     public @ResponseBody
-    Iterable<Shipping> getShipping(@AuthenticationPrincipal User user) {
+    Iterable<ShippingAddr> getShipping(@AuthenticationPrincipal User user) {
         if (user == null) {
             return new ArrayList<>();
         }
-        return user.getShippingAddrList();
+        return user.getShippingAddrAddrList();
     }
 
     @PostMapping
@@ -33,9 +33,9 @@ public class ShippingController {
         if (user == null) {
             return "not login";
         }
-        Shipping shipping = ShippingService.toShipping(form);
-        shipping.setOwner(user);
-        shippingRepository.save(shipping);
+        ShippingAddr shippingAddr = ShippingService.toShipping(form);
+        shippingAddr.setOwner(user);
+        shippingRepository.save(shippingAddr);
         return "{\"success\":true}";
     }
 
@@ -45,7 +45,7 @@ public class ShippingController {
         if (shipOpt.isEmpty() || !shipOpt.get().getOwner().equals(user)) {
             return "{\"success\":false}";
         }
-        shippingRepository.deleteById(shipOpt.get().getShippingID());
+        shippingRepository.deleteById(shipOpt.get().getID());
 
         return "{\"success\":true}";
     }

@@ -9,39 +9,67 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-public class Shipping {
+public class ShippingAddr {
+    /**
+     * Primary key
+     */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer shippingID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer ID;
 
+    /**
+     * Addr's owner
+     */
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "owner")
     private User owner;
 
+    /**
+     * Receiver's name
+     */
     @NotNull
     @Column(name = "receiver_name")
     private String receiverName;
 
+    /**
+     * Receiver's phone
+     */
     @NotNull
     @Column(name = "receiver_phone")
     private String receiverPhone;
 
+    /**
+     * Receiver's zip
+     */
     @Column(name = "receiver_zip")
     private String receiverZip;
 
+    /**
+     * Receiver's province
+     */
     @NotNull
     @Column(name = "receiver_province")
     private String receiverProvince;
 
+    /**
+     * Receiver's city
+     */
     @NotNull
     @Column(name = "receiver_city")
     private String receiverCity;
 
+    /**
+     * Receiver's district
+     */
     @NotNull
     @Column(name = "receiver_district")
     private String district;
 
+    /**
+     * Receiver's detailed address
+     */
     @NotNull
     @Column(name = "receiver_address")
     private String receiverAddress;
@@ -52,12 +80,12 @@ public class Shipping {
     @UpdateTimestamp
     private Date updateTime;
 
-    public Integer getShippingID() {
-        return shippingID;
+    public Integer getID() {
+        return ID;
     }
 
-    public void setShippingID(Integer shippingID) {
-        this.shippingID = shippingID;
+    public void setID(Integer ID) {
+        this.ID = ID;
     }
 
     public String getReceiverName() {

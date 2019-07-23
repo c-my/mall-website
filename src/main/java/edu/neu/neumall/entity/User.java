@@ -92,7 +92,7 @@ public class User implements UserDetails {
      */
     @JsonManagedReference
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    private List<Shipping> shippingAddrList = new ArrayList<>();
+    private List<ShippingAddr> shippingAddrAddrList = new ArrayList<>();
 
     @JsonBackReference
     @OneToMany(mappedBy = "owner")
@@ -110,16 +110,16 @@ public class User implements UserDetails {
         return role;
     }
 
-    public List<Shipping> getShippingAddrList() {
-        return shippingAddrList;
+    public List<ShippingAddr> getShippingAddrAddrList() {
+        return shippingAddrAddrList;
     }
 
-    public void setShippingAddrList(List<Shipping> shippingAddrList) {
-        this.shippingAddrList = shippingAddrList;
+    public void setShippingAddrAddrList(List<ShippingAddr> shippingAddrAddrList) {
+        this.shippingAddrAddrList = shippingAddrAddrList;
     }
 
-    public void addShipping(Shipping shipping) {
-        this.shippingAddrList.add(shipping);
+    public void addShipping(ShippingAddr shippingAddr) {
+        this.shippingAddrAddrList.add(shippingAddr);
     }
 
     public Set<Order> getOrder() {
