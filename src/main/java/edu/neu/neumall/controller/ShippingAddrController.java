@@ -47,8 +47,9 @@ public class ShippingAddrController {
     /**
      * add a shipping address for current user
      *
-     * @param form form-data from front-end
-     * @param user current login-user
+     * @param form   form-data from front-end
+     * @param errors errors when validating
+     * @param user   current login-user
      * @return operation result
      */
     @PostMapping
@@ -71,8 +72,9 @@ public class ShippingAddrController {
     /**
      * update certain shipping address of current user, identified by address id
      *
-     * @param form form-data from front-end
-     * @param user current log-in user
+     * @param form   form-data from front-end
+     * @param errors errors when validating
+     * @param user   current log-in user
      * @return operation status
      */
     @PutMapping
@@ -107,6 +109,7 @@ public class ShippingAddrController {
      * delete a shipping address of current user, identified by id
      *
      * @param shippingID target shipping-address to be deleted
+     * @param errors     errors when validating
      * @param user       current log-in user
      * @return operation status
      */

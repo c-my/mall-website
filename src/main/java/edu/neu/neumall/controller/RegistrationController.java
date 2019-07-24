@@ -33,6 +33,11 @@ public class RegistrationController {
         this.userService = userService;
     }
 
+    /**
+     * @param form   form-data from front-end
+     * @param errors errors when validating
+     * @return operation result
+     */
     @PostMapping
     public String processRegistration(@Valid UserService.UserRegistrationForm form,
                                       Errors errors) {
