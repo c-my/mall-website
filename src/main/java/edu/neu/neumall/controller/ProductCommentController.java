@@ -23,12 +23,26 @@ public class ProductCommentController {
         this.productCommentService = productCommentService;
     }
 
+    /**
+     * return all comments of a certain product
+     *
+     * @param productID product's identity
+     * @return comments of the product
+     */
     @GetMapping
     public @ResponseBody
     Set<ProductComment> getComment(@RequestParam("product_id") long productID) {
         return productCommentRepository.findByTargetID(productID);
     }
 
+    /**
+     * add a comment for certain product identified by product's id,
+     * set current user as commenter
+     *
+     * @param form form-data from front-end
+     * @param user current log-in user
+     * @return operation result
+     */
     @PostMapping
     public String appendComment(ProductCommentService.CommentForm form,
                                 @AuthenticationPrincipal User user) {

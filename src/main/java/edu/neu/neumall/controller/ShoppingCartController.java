@@ -54,5 +54,4 @@ public class ShoppingCartController {
         var cartList = shoppingCartService.removeShoppingCart(user);
         return "{\"success\":true}";
     }
-
 }

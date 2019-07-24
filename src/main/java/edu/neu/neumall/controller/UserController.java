@@ -50,7 +50,10 @@ public class UserController {
 
     @PostMapping
     public @ResponseBody
-    String addNewUser(@RequestBody User user) {
+    String addNewUser(@RequestBody User user, @AuthenticationPrincipal User admin) {
+        if (admin.getRole().equals(User.UserRole.ADMIN)) {
+            return "not login";
+        }
         userRepository.save(user);
         return "user added";
     }
