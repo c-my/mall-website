@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 @Service
 @Transactional
 public class OrderService {
@@ -82,12 +85,20 @@ public class OrderService {
 
     @Data
     public static class OrderForm {
+        @NotNull(message = "user_id cannot be null")
+        @NotBlank(message = "user_id must has value")
         private long user_id;
 
+        @NotNull(message = "product_id cannot be null")
+        @NotBlank(message = "product_id must has value")
         private long product_id;
 
+        @NotNull(message = "order_type cannot be null")
+        @NotBlank(message = "order_type must has value")
         private String order_type;
 
+        @NotNull(message = "order_count cannot be null")
+        @NotBlank(message = "order_count must has value")
         private int order_count;
     }
 

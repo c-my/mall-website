@@ -6,8 +6,11 @@ import edu.neu.neumall.repository.OrderRepository;
 import edu.neu.neumall.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -24,8 +27,17 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    /**
+     * add a order for current user
+     *
+     * @param form   form-data
+     * @param errors errors when validating
+     * @param user   current user
+     * @return operation result
+     */
     @PostMapping
-    public String addOrder(OrderService.OrderForm form,
+    public String addOrder(@Valid OrderService.OrderForm form,
+                           Errors errors,
                            @AuthenticationPrincipal User user) {
         form.setUser_id(user.getID());
         Order order = orderService.purchase(form);
@@ -35,9 +47,18 @@ public class OrderController {
         return "{\"order_id\":" + order.getID() + "}";
     }
 
+    /**
+     * get all orders of current user
+     *
+     * @param user current user
+     * @return a set of orders
+     */
     @GetMapping
     public @ResponseBody
     Set<Order> getOrder(@AuthenticationPrincipal User user) {
+        if (user == null) {
+            return new HashSet<>();
+        }
         return orderRepository.findByOwner_ID(user.getID());
     }
 }

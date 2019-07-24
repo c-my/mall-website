@@ -14,7 +14,7 @@ import java.util.Objects;
 @Service
 public class ImageFileService {
 
-    // TODO: 2019/7/24 specify the location of static image files 
+    // TODO: 2019/7/24 specify the location of static image files
     private final String staticRoot = this.getClass().getClassLoader().getResource("static/img").getPath() + "/";
 
     public String store(MultipartFile file) {
