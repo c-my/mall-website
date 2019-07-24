@@ -32,13 +32,12 @@ public class OrderController {
         if (order == null) {
             return "{\"order_id\":" + -1 + "}";
         }
-        user.getOrder().add(order);
         return "{\"order_id\":" + order.getID() + "}";
     }
 
     @GetMapping
     public @ResponseBody
     Set<Order> getOrder(@AuthenticationPrincipal User user) {
-        return user.getOrder();
+        return orderRepository.findByOwner_ID(user.getID());
     }
 }

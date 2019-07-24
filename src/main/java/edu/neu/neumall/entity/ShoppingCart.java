@@ -14,7 +14,7 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long cartID;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     @JsonManagedReference
     private User owner;

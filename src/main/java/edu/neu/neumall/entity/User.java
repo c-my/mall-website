@@ -32,9 +32,8 @@ public class User implements UserDetails {
      * User's avatar
      */
     @NotNull
-    @Column(name = "avatar", columnDefinition = "varchar(50) default '/img/default_avatar.jpg'")
-    private String avatar = "/img/default_avatar.jpg";
-    // TODO: 2019/7/23 add a default_avatar file in static file folder
+    @Column(name = "avatar", columnDefinition = "varchar(50) default '/img/default_avatar.png'")
+    private String avatar = "/img/default_avatar.png";
 
     /**
      * User's password, after encrypted
@@ -84,20 +83,23 @@ public class User implements UserDetails {
     /**
      * User's shopping cart
      */
-    @OneToOne(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner")
     @JsonBackReference
-    private ShoppingCart shoppingCart;
+    private Set<ShoppingCart> shoppingCart;
 
     /**
      * User's shipping address list
      */
     @JsonManagedReference
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    private List<ShippingAddr> shippingAddrAddrList = new ArrayList<>();
+    private Set<ShippingAddr> shippingAddrAddrList = new HashSet<>();
 
     @JsonBackReference
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Order> order;
+
+    @OneToMany(mappedBy = "commenter")
+    private Set<ProductComment> comments;
 
     @NotNull
     @Enumerated(value = EnumType.STRING)
@@ -111,11 +113,11 @@ public class User implements UserDetails {
         return role;
     }
 
-    public List<ShippingAddr> getShippingAddrAddrList() {
+    public Set<ShippingAddr> getShippingAddrAddrList() {
         return shippingAddrAddrList;
     }
 
-    public void setShippingAddrAddrList(List<ShippingAddr> shippingAddrAddrList) {
+    public void setShippingAddrAddrList(Set<ShippingAddr> shippingAddrAddrList) {
         this.shippingAddrAddrList = shippingAddrAddrList;
     }
 
@@ -131,11 +133,11 @@ public class User implements UserDetails {
         this.order = order;
     }
 
-    public ShoppingCart getShoppingCart() {
+    public Set<ShoppingCart> getShoppingCart() {
         return shoppingCart;
     }
 
-    public void setShoppingCart(ShoppingCart shoppingCart) {
+    public void setShoppingCart(Set<ShoppingCart> shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
 

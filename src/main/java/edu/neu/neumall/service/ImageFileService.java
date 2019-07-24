@@ -16,7 +16,6 @@ public class ImageFileService {
 
     private final String staticRoot = this.getClass().getClassLoader().getResource("static/img").getPath() + "/";
 
-
     public String store(MultipartFile file) {
         System.out.println("root:" + staticRoot);
         if (file.isEmpty() || Objects.requireNonNull(file.getOriginalFilename()).contains("..")) {

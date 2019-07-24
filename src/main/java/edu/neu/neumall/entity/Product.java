@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -73,6 +74,9 @@ public class Product {
     @JoinColumn(name = "owner")
     private User owner;
 
+    @OneToMany(mappedBy = "target")
+    private List<ProductComment> commentList;
+
     /**
      * Product's Status
      */
@@ -97,10 +101,12 @@ public class Product {
     private Set<ShoppingCart> shoppingCartSet;
 
     @CreationTimestamp
-    private Date create_time;
+    @Column(name = "create_time")
+    private Date createTime;
 
     @UpdateTimestamp
-    private Date update_time;
+    @Column(name = "update_time")
+    private Date updateTime;
 
     public enum ProductStatus {
         ONSALE, OFFSALE
@@ -138,20 +144,20 @@ public class Product {
         this.name = name;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getUpdate_time() {
-        return update_time;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdate_time(Date update_time) {
-        this.update_time = update_time;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     public Category getCategory() {
