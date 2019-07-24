@@ -12,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 
@@ -48,12 +50,32 @@ public class UserService implements UserDetailsService {
 
     @Data
     public static class UserRegistrationForm {
+        @NotNull(message = "nickname can not be null")
+        @NotBlank(message = "nickname must has a value")
         private String nickname;
+
+        @NotNull(message = "password can not be null")
+        @NotBlank(message = "password must has a value")
         private String password;
+
+        @NotNull(message = "phone can not be null")
+        @NotBlank(message = "phone must has a value")
         private String phone;
+
+        @NotNull(message = "email can not be null")
+        @NotBlank(message = "email must has a value")
         private String email;
+
+        @NotNull(message = "question can not be null")
+        @NotBlank(message = "question must has a value")
         private String question;
+
+        @NotNull(message = "answer can not be null")
+        @NotBlank(message = "answer must has a value")
         private String answer;
+
+        @NotNull(message = "role can not be null")
+        @NotBlank(message = "role must has a value")
         private String role;
     }
 
