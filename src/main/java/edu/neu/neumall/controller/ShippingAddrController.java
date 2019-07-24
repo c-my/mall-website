@@ -8,8 +8,10 @@ import edu.neu.neumall.service.ShippingAddrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,9 +52,14 @@ public class ShippingAddrController {
      * @return operation result
      */
     @PostMapping
-    public String appendShipping(ShippingAddrService.ShippingForm form, @AuthenticationPrincipal User user) {
+    public String appendShipping(@Valid ShippingAddrService.ShippingForm form,
+                                 Errors errors,
+                                 @AuthenticationPrincipal User user) {
         if (user == null) {
             return "not login";
+        }
+        if (errors.hasErrors()) {
+            return "{\"success\":false}";
         }
         ShippingAddr shippingAddr = ShippingAddrService.toShipping(form);
         shippingAddr.setOwner(user);
@@ -69,9 +76,14 @@ public class ShippingAddrController {
      * @return operation status
      */
     @PutMapping
-    public String updateShipping(ShippingAddrService.ShippingUpdateForm form, @AuthenticationPrincipal User user) {
+    public String updateShipping(@Valid ShippingAddrService.ShippingUpdateForm form,
+                                 Errors errors,
+                                 @AuthenticationPrincipal User user) {
         if (user == null) {
             return "not login";
+        }
+        if (errors.hasErrors()) {
+            return "{\"success\":false}";
         }
         ShippingAddr formAddr = ShippingAddrService.toShipping(form);
 
@@ -99,7 +111,12 @@ public class ShippingAddrController {
      * @return operation status
      */
     @DeleteMapping
-    public String removeShipping(@RequestParam("shipping_id") int shippingID, @AuthenticationPrincipal User user) {
+    public String removeShipping(@RequestParam("shipping_id") int shippingID,
+                                 Errors errors,
+                                 @AuthenticationPrincipal User user) {
+        if (errors.hasErrors()) {
+            return "shipping_id not valid";
+        }
         var shipOpt = shippingAddrRepository.findById(shippingID);
         if (shipOpt.isEmpty() || !shipOpt.get().getOwner().equals(user)) {
             return "{\"success\":false}";
