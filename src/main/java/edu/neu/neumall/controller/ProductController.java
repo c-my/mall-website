@@ -25,6 +25,7 @@ public class ProductController {
         this.categoryRepository = categoryRepository;
     }
 
+    // TODO: 2019/7/24 connect the query function
     @GetMapping
     public @ResponseBody
     Iterable<Product> getAllGoods(@RequestParam(required = false, defaultValue = "0") String price_low,
