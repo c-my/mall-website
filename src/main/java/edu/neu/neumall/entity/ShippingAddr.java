@@ -61,11 +61,11 @@ public class ShippingAddr {
     private String receiverCity;
 
     /**
-     * Receiver's district
+     * Receiver's receiverDistrict
      */
     @NotNull
     @Column(name = "receiver_district")
-    private String district;
+    private String receiverDistrict;
 
     /**
      * Receiver's detailed address
@@ -160,11 +160,11 @@ public class ShippingAddr {
         this.createTime = createTime;
     }
 
-    public String getDistrict() {
-        return district;
+    public String getReceiverDistrict() {
+        return receiverDistrict;
     }
 
-    public void setDistrict(String district) {
-        this.district = district;
+    public void setReceiverDistrict(String receiverDistrict) {
+        this.receiverDistrict = receiverDistrict;
     }
 }

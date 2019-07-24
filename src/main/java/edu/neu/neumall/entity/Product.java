@@ -85,6 +85,7 @@ public class Product {
     /**
      * Order relationship with user
      */
+    @JsonBackReference
     @OneToMany(mappedBy = "product")
     private Set<Order> order;
 

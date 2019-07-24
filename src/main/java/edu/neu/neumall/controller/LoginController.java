@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController {
 
-    @Autowired
-    public LoginController(UserService userService) {
-    }
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "login.html";

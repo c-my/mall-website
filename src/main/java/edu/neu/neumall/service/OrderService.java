@@ -1,6 +1,5 @@
 package edu.neu.neumall.service;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import edu.neu.neumall.entity.Order;
 import edu.neu.neumall.entity.Product;
 import edu.neu.neumall.entity.User;
@@ -28,18 +27,18 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public long purchase(OrderForm form) {
+    public Order purchase(OrderForm form) {
         if (!canPurchase(form)) {
             System.out.println("cannot pruchase");
-            return -1;
+            return null;
         }
         return processPurchase(form);
 
     }
 
     private boolean canPurchase(OrderForm form) {
-        var userID = form.getUserID();
-        var productID = form.getProductID();
+        var userID = form.getUser_id();
+        var productID = form.getProduct_id();
 
         //if user not exists or user is not a customer
         var userExist = userRepository.findById(userID);
@@ -54,15 +53,15 @@ public class OrderService {
         }
 
         // if there is not enough products
-        if (productExist.get().getCount() < form.getOrderCount()) {
+        if (productExist.get().getCount() < form.getOrder_count()) {
             return false;
         }
         return true;
     }
 
-    private long processPurchase(OrderForm form) {
-        var productID = form.getProductID();
-        var count = form.getOrderCount();
+    private Order processPurchase(OrderForm form) {
+        var productID = form.getProduct_id();
+        var count = form.getOrder_count();
 
         var product = productRepository.findById(productID).get();
         product.setCount(product.getCount() - count);
@@ -74,51 +73,46 @@ public class OrderService {
             var price = product.getPrice();
             order.setPrice(price);
 
-            var orderID = orderRepository.save(order).getID();
-            return orderID;
+            return orderRepository.save(order);
         } catch (Exception e) {
             e.printStackTrace();
-            return -1;
+            return null;
         }
     }
 
     @Data
     public static class OrderForm {
-        @JsonAlias("owner")
-        private long userID;
+        private long user_id;
 
-        @JsonAlias("product")
-        private long productID;
+        private long product_id;
 
-        @JsonAlias("order_type")
-        private String orderType;
+        private String order_type;
 
-        @JsonAlias("order_count")
-        private int orderCount;
+        private int order_count;
     }
 
     private Order toOrder(OrderForm form) throws Exception {
         Order order = new Order();
         try {
-            order.setType(Order.OrderType.valueOf(form.orderType));
+            order.setType(Order.OrderType.valueOf(form.order_type));
         } catch (IllegalArgumentException e) {
             return null;
         }
 
-        var userOption = userRepository.findById(form.userID);
+        var userOption = userRepository.findById(form.user_id);
         if (userOption.isEmpty()) {
             throw new Exception("user not find when cast orderform to order");
         } else {
             order.setOwner(userOption.get());
         }
 
-        var productOption = productRepository.findById(form.productID);
+        var productOption = productRepository.findById(form.product_id);
         if (productOption.isEmpty()) {
             return null;
         } else {
             order.setProduct(productOption.get());
         }
-        order.setCount(form.getOrderCount());
+        order.setCount(form.getOrder_count());
 
         return order;
     }

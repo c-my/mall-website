@@ -2,6 +2,7 @@ package edu.neu.neumall.controller;
 
 
 import edu.neu.neumall.service.ImageFileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ public class ImageController {
 
     private final ImageFileService imageFileService;
 
+    @Autowired
     public ImageController(ImageFileService imageFileService) {
         this.imageFileService = imageFileService;
     }

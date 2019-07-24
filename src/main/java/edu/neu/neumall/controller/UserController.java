@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -19,7 +21,7 @@ public class UserController {
 
 
     /**
-     * @param user
+     * @param user current login user
      * @return user details
      * return user details of the current user
      */
@@ -31,16 +33,31 @@ public class UserController {
         return user;
     }
 
+    /**
+     * @param user current login user
+     * @return all user list if current user is ADMIN
+     */
     @GetMapping("all")
     public @ResponseBody
-    Iterable<User> getAllUsers() {
+    Iterable<User> getAllUsers(@AuthenticationPrincipal User user) {
+
+        if (!user.getRole().equals(User.UserRole.ADMIN)) {
+            return new ArrayList<>();
+        }
         return userRepository.findAll();
+
     }
 
-    @PostMapping("add")
+    @PostMapping
     public @ResponseBody
     String addNewUser(@RequestBody User user) {
         userRepository.save(user);
         return "user added";
+    }
+
+    @DeleteMapping
+    public String removeUser(long userID) {
+        userRepository.deleteById(userID);
+        return "\"success\":true";
     }
 }

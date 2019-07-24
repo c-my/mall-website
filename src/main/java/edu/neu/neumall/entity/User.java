@@ -96,7 +96,7 @@ public class User implements UserDetails {
     private List<ShippingAddr> shippingAddrAddrList = new ArrayList<>();
 
     @JsonBackReference
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Order> order;
 
     @NotNull

@@ -27,9 +27,13 @@ public class OrderController {
     @PostMapping
     public String addOrder(OrderService.OrderForm form,
                            @AuthenticationPrincipal User user) {
-        form.setUserID(user.getID());
-        var orderID = orderService.purchase(form);
-        return "{\"order_id\":" + orderID + "}";
+        form.setUser_id(user.getID());
+        Order order = orderService.purchase(form);
+        if (order == null) {
+            return "{\"order_id\":" + -1 + "}";
+        }
+        user.getOrder().add(order);
+        return "{\"order_id\":" + order.getID() + "}";
     }
 
     @GetMapping
