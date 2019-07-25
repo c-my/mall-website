@@ -77,6 +77,8 @@ public class UserService implements UserDetailsService {
         @NotNull(message = "role can not be null")
         @NotBlank(message = "role must has a value")
         private String role;
+
+        private String avatar;
     }
 
     public User toUser(UserRegistrationForm form, PasswordEncoder passwordEncoder) {
@@ -87,6 +89,7 @@ public class UserService implements UserDetailsService {
         user.setEmail(form.email);
         user.setQuestion(form.question);
         user.setAnswer(form.answer);
+        user.setAvatar(form.avatar);
         try {
             user.setRole(User.UserRole.valueOf(form.role));
         } catch (IllegalArgumentException e) {
