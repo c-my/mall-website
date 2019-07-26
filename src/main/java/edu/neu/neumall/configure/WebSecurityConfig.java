@@ -11,7 +11,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 @EnableWebSecurity
@@ -48,8 +50,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/img/**", "/css/**", "/js/**", "/product", "favicon.ico", "/register", "/login").permitAll()
+
+        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry
+                = http.authorizeRequests();
+        registry.requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
+
+        http.cors().and()
+                .authorizeRequests()
+                .antMatchers("/img/**", "/css/**", "/js/**", "/product", "favicon.ico", "/register", "/login", "/image").permitAll()
                 .antMatchers("/shipping/**").hasAnyAuthority("CUSTOMER", "SHOPKEEPER")
 //                .antMatchers(HttpMethod.POST, "/img/**").hasRole("SHOPKEEPER")
 //                .antMatchers("/product/purchase").hasRole("CUSTOMER")
