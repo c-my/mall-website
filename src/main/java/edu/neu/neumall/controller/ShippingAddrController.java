@@ -41,7 +41,7 @@ public class ShippingAddrController {
             Logger.getAnonymousLogger().log(Level.INFO, "not login");
             return new ArrayList<>();
         }
-        return shippingAddrRepository.findByOwner_ID(user.getID());
+        return shippingAddrRepository.findByOwner_IDOrderByID(user.getID());
     }
 
     /**
@@ -109,17 +109,12 @@ public class ShippingAddrController {
      * delete a shipping address of current user, identified by id
      *
      * @param shippingID target shipping-address to be deleted
-     * @param errors     errors when validating
      * @param user       current log-in user
      * @return operation status
      */
     @DeleteMapping
-    public String removeShipping(@RequestParam("shipping_id") int shippingID,
-                                 Errors errors,
-                                 @AuthenticationPrincipal User user) {
-        if (errors.hasErrors()) {
-            return "shipping_id not valid";
-        }
+    public String removeShipping(@RequestParam("address_id") int shippingID
+            , @AuthenticationPrincipal User user) {
         var shipOpt = shippingAddrRepository.findById(shippingID);
         if (shipOpt.isEmpty() || !shipOpt.get().getOwner().equals(user)) {
             return "{\"success\":false}";
