@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,8 +73,7 @@ public class ShoppingCartService {
         @NotBlank(message = "_product_id must has a velue")
         private long product_id;
 
-        @NotNull(message = "user_phone can not be null")
-        @NotBlank(message = "user_phone must has a velue")
+        @Null
         private String user_phone;
 
         @NotNull(message = "count can not be null")
@@ -105,7 +105,7 @@ public class ShoppingCartService {
         private int count;
     }
 
-    public ShoppingCart toShoppingCart(ShoppingCartFormInterface form) {
+    public ShoppingCart toShoppingCart(ShoppingCartFormInterface form, User user) {
         ShoppingCart shoppingCart = new ShoppingCart();
 
         var productExists = productRepository.findById(form.getCart_id());
@@ -117,11 +117,11 @@ public class ShoppingCartService {
             return null;
         }
 
-        var userExists = userRepository.findByPhone(form.getUser_phone());
-        if (userExists.isEmpty()) {
-            return null;
-        }
-        var user = userExists.get();
+//        var userExists = userRepository.findByPhone(form.getUser_phone());
+//        if (userExists.isEmpty()) {
+//            return null;
+//        }
+//        var user = userExists.get();
 
         shoppingCart.setOwner(user);
         shoppingCart.setProduct(product);
