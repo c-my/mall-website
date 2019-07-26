@@ -36,9 +36,9 @@ public class ShippingAddrService {
 
     @Data
     public static class ShippingUpdateForm {
-        @NotBlank(message = "receiver_id must has a value")
         @NotNull(message = "receiver_id can not be null")
         private final int address_id;
+
         @NotBlank(message = "receiver_name must has a value")
         @NotNull(message = "receiver_name can not be null")
         private final String receiver_name;

@@ -23,7 +23,6 @@ public class ProductCommentService {
     @Data
     public static class CommentForm {
         @NotNull(message = "product_id cannot be null")
-        @NotBlank(message = "product_id must has a value")
         private long product_id;
 
         @NotNull(message = "content cannot be null")
