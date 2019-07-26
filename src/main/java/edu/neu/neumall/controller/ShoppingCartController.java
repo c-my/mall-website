@@ -42,7 +42,7 @@ public class ShoppingCartController {
         if (errors.hasErrors()) {
             return "{\"success\":false}";
         }
-        var shoppingCart = shoppingCartService.toShoppingCart(form);
+        var shoppingCart = shoppingCartService.toShoppingCart(form, user);
         if (shoppingCart == null) {
             return "{\"success\":false}";
         }
@@ -88,7 +88,7 @@ public class ShoppingCartController {
             return "{\"success\":true}";
         }
         var cart = cartExists.get();
-        var cartTem = shoppingCartService.toShoppingCart(form);
+        var cartTem = shoppingCartService.toShoppingCart(form, user);
         cart.setCount(cartTem.getCount());
         cart.setProduct(cartTem.getProduct());
         shoppingCartService.save(cart);
@@ -101,7 +101,7 @@ public class ShoppingCartController {
      * @param user current user
      * @return operation result
      */
-    @DeleteMapping("/clear")
+    @DeleteMapping
     public String clearCart(@AuthenticationPrincipal User user) {
         if (user == null) {
             return "not login";
