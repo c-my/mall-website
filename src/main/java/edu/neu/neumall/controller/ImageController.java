@@ -28,20 +28,15 @@ public class ImageController {
     /**
      * upload a file, and return its location
      *
-     * @param file   user uploaded file
-     * @param errors errors
-     * @param user   current user
+     * @param file user uploaded file
+     * @param user current user
      * @return url of the location of static file
      */
     @PostMapping
-    public String uploadImage(@Valid @RequestParam("image") MultipartFile file,
-                              Errors errors,
-                              @AuthenticationPrincipal User user) {
+    public String uploadImage(@Valid @RequestParam("image") MultipartFile file
+            , @AuthenticationPrincipal User user) {
         if (user == null) {
             return "not login";
-        }
-        if (errors.hasErrors()) {
-            return "\"success\":false";
         }
         String path = imageFileService.store(file);
         return "{\"path\":" + path + "}";
