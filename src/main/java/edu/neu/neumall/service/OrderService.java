@@ -86,11 +86,9 @@ public class OrderService {
     @Data
     public static class OrderForm {
         @NotNull(message = "user_id cannot be null")
-        @NotBlank(message = "user_id must has value")
         private long user_id;
 
         @NotNull(message = "product_id cannot be null")
-        @NotBlank(message = "product_id must has value")
         private long product_id;
 
         @NotNull(message = "order_type cannot be null")
@@ -98,7 +96,6 @@ public class OrderService {
         private String order_type;
 
         @NotNull(message = "order_count cannot be null")
-        @NotBlank(message = "order_count must has value")
         private int order_count;
     }
 

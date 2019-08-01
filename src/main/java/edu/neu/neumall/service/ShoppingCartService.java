@@ -62,22 +62,16 @@ public class ShoppingCartService {
 
         long getProduct_id();
 
-        String getUser_phone();
-
         int getCount();
     }
 
     @Data
     public static class ShopingCartForm implements ShoppingCartFormInterface {
         @NotNull(message = "product_id can not be null")
-        @NotBlank(message = "_product_id must has a velue")
         private long product_id;
 
-        @Null
-        private String user_phone;
 
         @NotNull(message = "count can not be null")
-        @NotBlank(message = "count must has a velue")
         private int count;
 
         @Override
@@ -89,31 +83,26 @@ public class ShoppingCartService {
     @Data
     public static class ShoppingCartUpdateForm implements ShoppingCartFormInterface {
         @NotNull(message = "cart_id can not be null")
-        @NotBlank(message = "cart_id must has a velue")
         private long cart_id;
 
         @NotNull(message = "product_id can not be null")
-        @NotBlank(message = "product_id must has a velue")
         private long product_id;
 
-        @NotNull(message = "user_phone can not be null")
-        @NotBlank(message = "user_phone must has a velue")
-        private String user_phone;
-
         @NotNull(message = "count can not be null")
-        @NotBlank(message = "count must has a velue")
         private int count;
     }
 
     public ShoppingCart toShoppingCart(ShoppingCartFormInterface form, User user) {
         ShoppingCart shoppingCart = new ShoppingCart();
 
-        var productExists = productRepository.findById(form.getCart_id());
+        var productExists = productRepository.findById(form.getProduct_id());
         if (productExists.isEmpty()) {
+            System.out.println("product not exists");
             return null;
         }
         var product = productExists.get();
         if (product.getCount() < form.getCount()) {
+            System.out.println("product not enough");
             return null;
         }
 
