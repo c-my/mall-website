@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/shopping-cart")
+@RequestMapping("/cart")
 public class ShoppingCartController {
 
     private ShoppingCartService shoppingCartService;
@@ -40,14 +40,17 @@ public class ShoppingCartController {
             return "not login";
         }
         if (errors.hasErrors()) {
+            System.out.println("errors");
+            System.out.println(errors.toString());
             return "{\"success\":false}";
         }
         var shoppingCart = shoppingCartService.toShoppingCart(form, user);
         if (shoppingCart == null) {
+            System.out.println("error when to shoppingcart");
             return "{\"success\":false}";
         }
         shoppingCartService.save(shoppingCart);
-        return "{\"success\":false}";
+        return "{\"success\":true}";
     }
 
     /**
