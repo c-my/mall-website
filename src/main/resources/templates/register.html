@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.15.0/esm/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <form action="/register" method="post" th:object="${registrationForm}">
+        <div class="form-group">
+            <label for="username-input">Nickname</label>
+            <input type="text" id="username-input" th:field="*{nickname}">
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('nickname')}"
+                  th:errors="*{nickname}">nickname error</span>
+        </div>
+        <div class="form-group">
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input" th:field="*{password}">
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('password')}"
+                  th:errors="*{password}">password error</span>
+        </div>
+        <div class="form-group">
+            <label for="phone-input">Phone</label>
+            <input type="tel" id="phone-input" name="phone">
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('phone')}"
+                  th:errors="*{phone}">phone error</span>
+        </div>
+        <div class="form-group">
+            <label for="email-input">Email</label>
+            <input type="email" id="email-input" name="email">
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}">email error</span>
+        </div>
+        <div class="form-group">
+            <label for="question-input">Question</label>
+            <input type="text" id="question-input" name="question">
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('question')}"
+                  th:errors="*{question}">question error</span>
+        </div>
+        <div class="form-group">
+            <label for="answer-input">Answer</label>
+            <input type="text" id="answer-input" name="answer">
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('answer')}"
+                  th:errors="*{answer}">answer error</span>
+        </div>
+        <div class="form-group">
+            <label for="img-input">Avatar</label>
+            <input type="file" id="img-input">
+        </div>
+        <!--        <div class="form-group">-->
+        <!--            <label for="role-input">Role</label>-->
+        <!--            <input type="text" id="role-input" name="role">-->
+        <!--        </div>-->
+        <div class="form-group">
+            <label for="role-select">Role</label>
+            <select id="role-select" name="role">
+                <option>SHOPKEEPER</option>
+                <option selected>CUSTOMER</option>
+            </select>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+</div>
+</body>
+</html>
