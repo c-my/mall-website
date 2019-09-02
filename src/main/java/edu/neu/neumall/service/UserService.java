@@ -95,7 +95,11 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    Optional<User> findUserByPhone(String phone) {
+    public Optional<User> findUserByPhone(String phone) {
         return userRepository.findByPhone(phone);
+    }
+
+    public Optional<User> findUserByID(long id) {
+        return userRepository.findById(id);
     }
 }

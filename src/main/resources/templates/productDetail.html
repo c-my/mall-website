@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<!--/*@thymesVar id="comment" type="edu.neu.neumall.entity.Product"*/-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--/*@thymesVar id="product" type="edu.neu.neumall.entity.Product"*/-->
+    <title th:text="${product.name}"></title>
+</head>
+<body>
+<ul>
+    <!--/*@thymesVar id="product" type="edu.neu.neumall.entity.Product"*/-->
+    <li th:each="comment:${product.getCommentList()}">
+        <span th:text="${comment.content}"></span>
+    </li>
+</ul>
+</body>
+</html>

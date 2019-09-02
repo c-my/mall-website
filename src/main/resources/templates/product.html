@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>产品列表</title>
+</head>
+<body>
+<ul>
+    <!--/*@thymesVar id="productList" type="java.util.List<edu.neu.neumall.entity.Product>"*/-->
+    <li th:each="product:${productList}">
+        <span>
+            <img th:src="${product.main_img}"/>
+        </span>
+        <span>
+            <a th:href="@{'/product/'+${product.ID}}" th:text="product.name"></a>
+        </span>
+        <span th:text="${product.description}"></span>
+        <span th:text="${product.category.name}"></span>
+    </li>
+</ul>
+
+
+</body>
+</html>
