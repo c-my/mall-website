@@ -16,7 +16,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    long ID;
+    private long ID;
 
     /**
      * User attached to order
@@ -99,6 +99,14 @@ public class Order {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public long getID() {
+        return ID;
+    }
+
+    public void setID(long ID) {
+        this.ID = ID;
     }
 
     public enum OrderStatus {
