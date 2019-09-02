@@ -6,6 +6,13 @@
 </head>
 <body>
 <div>
+    <span><!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
+        <img th:src="${user.avatar}"/>
+    </span>
+    <!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
+    <span th:text="${user.nickName}"></span>
+</div>
+<div>
     <ul>
         <!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
         <li th:each="addr:${user.shippingAddrAddrList}">

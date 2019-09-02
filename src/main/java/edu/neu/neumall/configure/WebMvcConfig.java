@@ -18,7 +18,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         var location = Paths.get(staticPath.toString(), "img");
         location = Path.of(location.toString(), "/");
         System.out.println(location);
-        registry.addResourceHandler("/**").addResourceLocations("file:///" + location.toString());
+        registry.addResourceHandler("/img/**").addResourceLocations("file:/" + location.toString() + "\\");
     }
 
     @Bean

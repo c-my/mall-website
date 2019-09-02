@@ -3,22 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>产品列表</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/mall.css">
 </head>
 <body>
-<ul>
-    <!--/*@thymesVar id="productList" type="java.util.List<edu.neu.neumall.entity.Product>"*/-->
-    <li th:each="product:${productList}">
-        <span>
-            <img th:src="${product.main_img}"/>
-        </span>
-        <span>
-            <a th:href="@{'/product/'+${product.ID}}" th:text="product.name"></a>
-        </span>
-        <span th:text="${product.description}"></span>
-        <span th:text="${product.category.name}"></span>
-    </li>
-</ul>
-
+<div class="seckill">
+    <!-- 头部 -->
+    <div class="seckill-head">
+        <div class="seckill-icon">
+            <img src="img/clock.png">
+        </div>
+        <div class="seckill-text">
+            <span class="seckill-title">限时秒杀</span>
+            <span class="seckill-remarks">总有你想不到的低价</span>
+        </div>
+        <div class="count-down">
+            <span class="count-down-text">当前场次</span>
+            <span class="count-down-num count-down-hour">00</span>
+            <span class="count-down-point">:</span>
+            <span class="count-down-num count-down-minute">56</span>
+            <span class="count-down-point">:</span>
+            <span class="count-down-num count-down-seconds">00</span>
+            <span class="count-down-text">后结束抢购</span>
+        </div>
+    </div>
+    <!-- 内容 -->
+    <div class="seckill-content">
+        <!--/*@thymesVar id="productList" type="java.util.List<edu.neu.neumall.entity.Product>"*/-->
+        <div th:each="product:${productList}" class="seckill-item">
+            <div class="seckill-item-img">
+                <img th:src="${product.main_img}">
+            </div>
+            <div class="seckill-item-info">
+                <p th:text="${product.name}"></p>
+                <p><i class="fa fa-rmb text-danger"></i><span class="seckill-price text-danger"
+                                                              th:text="${product.price}"></span>
+                    <i
+                            class="fa fa-rmb"></i></p>
+            </div>
+        </div>
+        <div class="seckill-item">
+            <div class="seckill-item-img">
+                <img src="img/seckill-item2.jpg">
+            </div>
+            <div class="seckill-item-info">
+                <p>Kindle Paperwhite 全新升级版6英寸护眼非反光电子墨水</p>
+                <p><i class="fa fa-rmb text-danger"></i><span class="seckill-price text-danger">989.0</span><i
+                        class="fa fa-rmb"></i><span class="seckill-old-price"></span><s>1299.0</s></p>
+            </div>
+        </div>
+        <div class="seckill-item">
+            <div class="seckill-item-img">
+                <img src="img/seckill-item3.jpg">
+            </div>
+            <div class="seckill-item-info">
+                <p>粮悦 大吃兄糯米锅巴 安徽特产锅巴糯米原味400g*2盒</p>
+                <p><i class="fa fa-rmb text-danger"></i><span class="seckill-price text-danger">21.8</span><i
+                        class="fa fa-rmb"></i><span class="seckill-old-price"></span><s>49.0</s></p>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
