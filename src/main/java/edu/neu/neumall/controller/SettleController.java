@@ -26,12 +26,18 @@ public class SettleController {
     }
 
     @PostMapping
-    public String processSettle(@RequestParam("itemList[]") List<Long> shoppingCartItems, Model model, @AuthenticationPrincipal User user) {
+    public String confirmSettle(@RequestParam("itemList[]") List<Long> shoppingCartItems, Model model, @AuthenticationPrincipal User user) {
         for (var cartID : shoppingCartItems) {
             System.out.println(cartID);
         }
         model.addAttribute("shippingAddrList", user.getShippingAddrAddrList());
         return "settle.html";
+    }
+
+    @PostMapping("/process")
+    public String processSettle(@RequestParam("purchaseList[]") List<Long> purchaseItem, @AuthenticationPrincipal User user) {
+
+        return "settleSuccess.html";
     }
 
     @GetMapping

@@ -23,7 +23,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public OrderService(OrderRepository orderRepository,
-                        @Qualifier("userRepository") UserRepository userRepository,
+                        UserRepository userRepository,
                         ProductRepository productRepository) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
