@@ -89,7 +89,7 @@ public class User implements UserDetails {
     /**
      * User's shopping cart
      */
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
 //    @JsonBackReference
     private Set<ShoppingCart> shoppingCart;
 

@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/product/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/product/**").hasAnyAuthority("ADMIN", "SHOPKEEPER")
                 .antMatchers(HttpMethod.DELETE, "/product/**").hasAnyAuthority("ADMIN", "SHOPKEEPER")
+                .antMatchers("/cart").hasAnyAuthority("CUSTOMER", "ADMIN")
                 .antMatchers("/home/**").hasAnyAuthority("ADMIN", "SHOPKEEPER", "CUSTOMER")
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password");
