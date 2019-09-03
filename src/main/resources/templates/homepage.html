@@ -1,31 +1,135 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>我的主页</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div>-->
+    <!--<span>&lt;!&ndash;/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/&ndash;&gt;-->
+        <!--<img th:src="${user.avatar}"/>-->
+    <!--</span>-->
+    <!--&lt;!&ndash;/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/&ndash;&gt;-->
+    <!--<span th:text="${user.nickName}"></span>-->
+    <!--<span th:text="${user.phone}"></span>-->
+    <!--<button id="profile-btn">修改资料</button>-->
+<!--</div>-->
+<!--<div>-->
+    <!--<ul>-->
+        <!--&lt;!&ndash;/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/&ndash;&gt;-->
+        <!--<li th:each="addr:${user.shippingAddrAddrList}">-->
+            <!--<span th:text="${addr.getReceiverProvince()}"></span>-->
+            <!--<span th:text="${addr.getReceiverCity()}"></span>-->
+            <!--<span th:text="${addr.getReceiverDistrict()}"></span>-->
+            <!--<span th:text="${addr.getReceiverPhone()}"></span>-->
+            <!--<span th:text="${addr.getReceiverName()}"></span>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--<button id="shipping-btn">编辑收货地址</button>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<html>
+<head lang="en">
+    <meta charset="utf-8" />
     <title>我的主页</title>
+    <link rel="stylesheet" type="text/css" href="css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mygxin.css" />
 </head>
 <body>
-<div>
-    <span><!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
-        <img th:src="${user.avatar}"/>
-    </span>
+<div class="address mt" id="add">
+    <div class="wrapper clearfix">
+        <a href="product" class="fl">首页</a>
+        <span>/</span>
+        <a href="home" class="on">个人中心</a>
+    </div>
+</div>
+<!------------------------------Bott------------------------------>
+<div class="Bott">
     <!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
-    <span th:text="${user.nickName}"></span>
-    <span th:text="${user.phone}"></span>
-    <button id="profile-btn">修改资料</button>
+    <div class="wrapper clearfix">
+        <div class="zuo fl">
+            <h3>
+                <a href="#"><img th:src="${user.avatar}" width="92" height="92"/></a>
+                <p class="clearfix"><span th:text="${user.nickName}" class="fl" ></span></p>
+            </h3>
+            <div>
+                <h4>个人中心</h4>
+                <ul>
+                    <li><a href="cart">我的购物车</a></li>
+                    <li  class="on"><a href="home/profile">我的信息</a></li>
+                </ul>
+                <h4>信息管理</h4>
+                <ul>
+                    <li><a href="home/shipping">地址管理</a></li>
+                    <li><a href="home/change">修改密码</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="you fl">
+            <div class="tx clearfix">
+                <div class="fl clearfix">
+                    <a href="#" class="fl"><img th:src="${user.avatar}" width="92" heigh="92"/></a>
+
+                </div>
+                <div th:text="'phone '+${user.phone}" class="fr"></div>
+            </div>
+            <div class="bott">
+                <div class="clearfix">
+                    <a href="#" class="fl"><img src="img/gxin1.jpg"/></a>
+                    <p class="fl"><span><strong>我的购物车</strong></span>
+                        <a href="cart">查看我的购物车></a>
+                    </p>
+                </div>
+                <div class="clearfix">
+                    <a href="#" class="fl"><img src="img/gxin2.jpg"/></a>
+                    <p class="fl"><span><strong>我的信息</strong></span>
+                        <a href="home/profile">查看我的信息></a>
+                    </p>
+                </div>
+                <div class="clearfix">
+                    <a href="#" class="fl"><img src="img/gxin3.jpg"/></a>
+                    <p class="fl"><span><strong>地址管理</strong></span>
+                        <a href="home/shipping">管理我的地址></a>
+                    </p>
+                </div>
+                <div class="clearfix">
+                    <a href="#" class="fl"><img src="img/gxin4.jpg"/></a>
+                    <p class="fl"><span><strong>密码管理</strong></span>
+                        <a href="home/change">修改我的密码></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <ul>
-        <!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
-        <li th:each="addr:${user.shippingAddrAddrList}">
-            <span th:text="${addr.getReceiverProvince()}"></span>
-            <span th:text="${addr.getReceiverCity()}"></span>
-            <span th:text="${addr.getReceiverDistrict()}"></span>
-            <span th:text="${addr.getReceiverPhone()}"></span>
-            <span th:text="${addr.getReceiverName()}"></span>
-        </li>
-    </ul>
-    <button id="shipping-btn">编辑收货地址</button>
+
+<!--返回顶部-->
+<div class="gotop">
+    <a href="cart.html">
+        <dl>
+            <dt><img src="img/gt1.png"/></dt>
+            <dd>去购<br />物车</dd>
+        </dl>
+    </a>
+    <a href="mygxin.html">
+        <dl>
+            <dt><img src="img/gt3.png"/></dt>
+            <dd>个人<br />中心</dd>
+        </dl>
+    </a>
+    <a href="#" class="toptop" style="display: none">
+        <dl>
+            <dt><img src="img/gt4.png"/></dt>
+            <dd>返回<br />顶部</dd>
+        </dl>
+    </a>
 </div>
+<script src="js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/user.js" type="text/javascript" charset="utf-8"></script>
+
 </body>
 </html>

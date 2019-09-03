@@ -27,11 +27,11 @@
     <div class="orderCon wrapper clearfix">
         <div class="orderL fl">
             <!--------h3---------------->
-            <h3>收件信息<a href="#" class="fr">新增地址</a></h3>
+            <h3>收件信息<a href="#" class="fr"></a></h3>
             <!--------addres---------------->
             <!--/*@thymesVar id="shippingAddrList" type="java.util.Set<edu.neu.neumall.entity.ShippingAddr>"*/-->
             <div th:each="addr:${shippingAddrList}" class="addres clearfix">
-                <div class="addre fl on">
+                <div class="addre fl on"  >
                     <div class="tit clearfix">
                         <p th:text="${addr.getReceiverName()}" class="fl">
                             <span class="default">[默认地址]</span>
@@ -43,7 +43,7 @@
                         </p>
                     </div>
                     <div class="addCon">
-                        <p th:text="${addr.getReceiverProvince()}+nbsp+${addr.getReceiverCity()}+nbsp+${addr.getReceiverDistrict()}"></p>
+                        <p th:text="${addr.getReceiverProvince()}+' '+${addr.getReceiverCity()}+' '+${addr.getReceiverDistrict()}"></p>
                         <p th:text="${addr.getReceiverPhone()}"></p>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
         </div>
         <div class="orderR fr">
             <div class="msg">
-                <h3>订单内容<a href="cart.html" class="fr">返回购物车</a></h3>
+                <h3>订单内容<a href="cart" class="fr">返回购物车</a></h3>
                 <!--------ul---------------->
                 <ul class="clearfix">
                     <li class="fl">

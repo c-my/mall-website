@@ -27,13 +27,31 @@ public class HomeController {
         return "homepage";
     }
 
-    @GetMapping("/{userID}")
-    public String homePage(@PathVariable("userID") long userID, Model model) {
-        var user = userService.findUserByID(userID);
-        if (user.isEmpty()) {
-            return "error";
-        }
-        model.addAttribute("user", user.get());
-        return "homepage.html";
+//    @GetMapping("/{userID}")
+//    public String homePage(@PathVariable("userID") long userID, Model model) {
+//        var user = userService.findUserByID(userID);
+//        if (user.isEmpty()) {
+//            return "error";
+//        }
+//        model.addAttribute("user", user.get());
+//        return "homepage.html";
+//    }
+
+    @GetMapping("/profile")
+    public String profilePage(Model model, @AuthenticationPrincipal User user){
+        model.addAttribute("user",user);
+        return "profile.html";
+    }
+
+    @GetMapping("/shipping")
+    public String shippingPage(Model model, @AuthenticationPrincipal User user){
+        model.addAttribute("user",user);
+        return "shipping.html";
+    }
+
+    @GetMapping("/change")
+    public String changePage(Model model, @AuthenticationPrincipal User user){
+        model.addAttribute("user",user);
+        return "change.html";
     }
 }
