@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>结算</title>
 </head>
 <body>
-
+<ul>
+    <!--/*@thymesVar id="shippingAddrList" type="java.util.Set<edu.neu.neumall.entity.ShippingAddr>"*/-->
+    <li th:each="addr:${shippingAddrList}">
+        <span th:text="${addr.getReceiverProvince()}"></span>
+        <span th:text="${addr.getReceiverCity()}"></span>
+        <span th:text="${addr.getReceiverDistrict()}"></span>
+        <span th:text="${addr.getReceiverPhone()}"></span>
+        <span th:text="${addr.getReceiverName()}"></span>
+    </li>
+</ul>
 </body>
 </html>

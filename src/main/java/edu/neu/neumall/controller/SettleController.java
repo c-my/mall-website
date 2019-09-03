@@ -30,7 +30,7 @@ public class SettleController {
         for (var cartID : shoppingCartItems) {
             System.out.println(cartID);
         }
-
+        model.addAttribute("shippingAddrList", user.getShippingAddrAddrList());
         return "settle.html";
     }
 
