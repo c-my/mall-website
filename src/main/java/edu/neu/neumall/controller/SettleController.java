@@ -26,9 +26,11 @@ public class SettleController {
     }
 
     @PostMapping
-    public String confirmSettle(@RequestParam("itemList[]") List<Long> shoppingCartItems, Model model, @AuthenticationPrincipal User user) {
-        for (var cartID : shoppingCartItems) {
-            System.out.println(cartID);
+    public String confirmSettle(@RequestParam(value = "itemList[]", required = false) List<Long> shoppingCartItems, Model model, @AuthenticationPrincipal User user) {
+        if (shoppingCartItems != null) {
+            for (var cartID : shoppingCartItems) {
+                System.out.println(cartID);
+            }
         }
         model.addAttribute("shippingAddrList", user.getShippingAddrAddrList());
         return "settle.html";
