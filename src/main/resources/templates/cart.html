@@ -7,13 +7,12 @@
     <link rel="stylesheet" type="text/css" href="/css/proList.css" />
 </head>
 <body>
-<!--/*@thymesVar id="cart" type="java.util.Set<.neu.neumall.entity.ShoppingCart>"*/-->
-<!--th:each="item:${cart}"-->
-<div  class="cart mt">
+<!--/*@thymesVar id="productlist" type="java.util.Set<edu.neu.neumall.entity.ShoppingCart>"*/-->
+<div  th:each="product:${productlist}" class="cart mt">
     <!-----------------site------------------->
     <div class="site">
         <p class=" wrapper clearfix">
-            <span class="fl">购物车</span>
+            <span  class="fl">购物车</span>
             <img class="top" src="img/temp/cartTop01.png">
             <a href="index.html" class="fr">继续购物&gt;</a>
         </p>`
@@ -37,7 +36,7 @@
                     <dl class="clearfix">
                         <dt class="fl"><img src="img/temp/cart01.jpg"></dt>
                         <dd class="fl">
-                            <p th:text="${item}"></p>
+                            <p>花瓶</p>
                         </dd>
                     </dl>
                 </a>
