@@ -23,7 +23,7 @@ public class ShoppingCartController {
                 products.add(item.getProduct());
             }
         }
-        model.addAttribute("products", products);
+        model.addAttribute("productList", products);
         return "cart.html";
     }
 }
