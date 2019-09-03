@@ -31,3 +31,4 @@ build/
 .vscode/
 
 application.properties
+/.idea/misc.xml
