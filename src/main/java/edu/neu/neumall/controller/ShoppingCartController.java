@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ShoppingCartController {
     @GetMapping
     public String shoppingCartPage(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("cart", user.getShoppingCart());
         return "";
     }
 }
