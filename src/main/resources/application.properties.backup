@@ -6,3 +6,4 @@ spring.jpa.properties.hibernate.default_schema = public
 spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults = false
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL9Dialect
 server.servlet.session.timeout=30m
+spring.thymeleaf.cache=false
