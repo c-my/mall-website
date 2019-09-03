@@ -82,6 +82,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public void save(Product product) {
+        productRepository.save(product);
+    }
+
     @Data
     public static class ProductUpdateForm {
         private long productid;
