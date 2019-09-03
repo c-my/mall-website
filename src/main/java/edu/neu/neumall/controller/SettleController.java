@@ -25,7 +25,7 @@ public class SettleController {
         this.shoppingCartRepository = shoppingCartRepository;
     }
 
-    @PostMapping
+    @GetMapping
     public String confirmSettle(@RequestParam(value = "itemList[]", required = false) List<Long> shoppingCartItems, Model model, @AuthenticationPrincipal User user) {
         if (shoppingCartItems != null) {
             for (var cartID : shoppingCartItems) {
@@ -42,7 +42,7 @@ public class SettleController {
         return "settleSuccess.html";
     }
 
-    @GetMapping
+    @GetMapping("/test")
     public String testPage() {
         return "testSettle.html";
     }
