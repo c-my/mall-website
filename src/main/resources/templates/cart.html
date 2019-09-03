@@ -8,13 +8,13 @@
 </head>
 <body>
 <!--/*@thymesVar id="productlist" type="java.util.Set<edu.neu.neumall.entity.ShoppingCart>"*/-->
-<div  th:each="product:${productlist}" class="cart mt">
+<div  class="cart mt">
     <!-----------------site------------------->
     <div class="site">
         <p class=" wrapper clearfix">
             <span  class="fl">购物车</span>
             <img class="top" src="img/temp/cartTop01.png">
-            <a href="index.html" class="fr">继续购物&gt;</a>
+            <a href="product.html" class="fr">继续购物&gt;</a>
         </p>`
     </div>
     <!-----------------table------------------->
@@ -26,7 +26,7 @@
             <div>小计</div>
             <div>操作</div>
         </div>
-        <div class="th">
+        <div th:each="product:${productlist}" class="th">
             <div class="pro clearfix">
                 <label class="fl">
                     <input type="checkbox"/>
@@ -34,14 +34,14 @@
                 </label>
                 <a class="fl" href="#">
                     <dl class="clearfix">
-                        <dt class="fl"><img src="img/temp/cart01.jpg"></dt>
+                        <dt class="fl"><img th:src="${product.getProduct().main_img}" width="120" height="120"></dt>
                         <dd class="fl">
-                            <p>花瓶</p>
+                            <p th:text="${product.getProduct().name}"></p>
                         </dd>
                     </dl>
                 </a>
             </div>
-            <div class="price">￥20.00</div>
+            <div class="price"><p th:text="'￥'+ ${product.getProduct().price}"></p></div>
             <div class="number">
                 <p class="num clearfix">
                     <img class="fl sub" src="img/temp/sub.jpg">
@@ -49,10 +49,10 @@
                     <img class="fl add" src="img/temp/add.jpg">
                 </p>
             </div>
-            <div class="price sAll">￥20.00</div>
+            <div class="price sAll " th:text="${'￥'+product.getProduct().price}"></div>
             <div class="price"><a class="del" href="#2">删除</a></div>
         </div>
-        <div class="goOn">空空如也~<a href="index.html">去逛逛</a></div>
+        <div class="goOn">空空如也~<a href="product.html">去逛逛</a></div>
         <div class="tr clearfix">
             <label class="fl">
                 <input class="checkAll" type="checkbox"/>
