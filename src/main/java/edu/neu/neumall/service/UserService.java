@@ -16,6 +16,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -102,4 +103,13 @@ public class UserService implements UserDetailsService {
     public Optional<User> findUserByID(long id) {
         return userRepository.findById(id);
     }
+
+    public void deleteUserByID(long id) {
+        userRepository.deleteById(id);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
 }

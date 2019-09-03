@@ -11,6 +11,8 @@
     </span>
     <!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
     <span th:text="${user.nickName}"></span>
+    <span th:text="${user.phone}"></span>
+    <button id="profile-btn">修改资料</button>
 </div>
 <div>
     <ul>
@@ -23,6 +25,7 @@
             <span th:text="${addr.getReceiverName()}"></span>
         </li>
     </ul>
+    <button id="shipping-btn">编辑收货地址</button>
 </div>
 </body>
 </html>

@@ -83,6 +83,9 @@ public class User implements UserDetails {
     @UpdateTimestamp
     private Date update_time;
 
+    @Column(name = "is_locked", columnDefinition = "bool default 'false'")
+    private boolean isLocked;
+
     /**
      * User's shopping cart
      */
@@ -218,7 +221,11 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !isLocked;
+    }
+
+    public void setUserLocked(boolean state) {
+        this.isLocked = state;
     }
 
     @Override
