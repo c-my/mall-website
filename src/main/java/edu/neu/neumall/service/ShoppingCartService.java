@@ -30,6 +30,9 @@ public class ShoppingCartService {
         var cartExist = shoppingCartRepository.findByOwnerIDAndProductID(user.getID(), productID);
         if (cartExist.isPresent()) {
             var cart = cartExist.get();
+            var userCart = user.getShoppingCart().stream().filter(shoppingCart -> shoppingCart.getCartID() == cart.getCartID())
+                    .findFirst().get();
+            userCart.setCount(cart.getCount() + 1);
             cart.setCount(cart.getCount() + 1);
             shoppingCartRepository.save(cart);
             return true;
@@ -40,13 +43,14 @@ public class ShoppingCartService {
         shoppingCart.setCount(count);
         shoppingCart.setProduct(product);
         shoppingCart.setOwner(user);
+        user.getShoppingCart().add(shoppingCart);
         shoppingCartRepository.save(shoppingCart);
         return true;
     }
 
     public void deleteCartByID(long cartID, User user) {
         var cart = shoppingCartRepository.findById(cartID);
-        user.getShoppingCart().remove(cart);
+        user.getShoppingCart().remove(cart.get());
         shoppingCartRepository.deleteById(cartID);
     }
 

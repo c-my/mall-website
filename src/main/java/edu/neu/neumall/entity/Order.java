@@ -116,4 +116,18 @@ public class Order {
     public enum OrderType {
         PURCHASE, REF
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Order) {
+            return this.owner.equals(((Order) o).owner)
+                    && this.product.equals(((Order) o).product);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Long.hashCode(this.ID);
+    }
 }

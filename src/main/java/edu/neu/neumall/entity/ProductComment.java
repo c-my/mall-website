@@ -110,4 +110,13 @@ public class ProductComment {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof ProductComment) {
+            return this.commenter.equals(((ProductComment) o).commenter)
+                    && this.target.equals(((ProductComment) o).target);
+        }
+        return false;
+    }
 }

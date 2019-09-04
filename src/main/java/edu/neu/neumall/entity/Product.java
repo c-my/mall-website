@@ -219,4 +219,18 @@ public class Product {
     public void setMain_img(String main_img) {
         this.main_img = main_img;
     }
+
+    @Override
+    public int hashCode() {
+        return this.name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Product) {
+            return this.owner.equals(((Product) o).owner)
+                    && this.name.equals(((Product) o).name);
+        }
+        return false;
+    }
 }

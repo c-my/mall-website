@@ -26,13 +26,15 @@ public class ShoppingCartController {
 
     @GetMapping
     public String shoppingCartPage(@AuthenticationPrincipal User user, Model model) {
-        ArrayList<Product> products = new ArrayList<>();
         var shoppingCartItems = user.getShoppingCart();
         if (shoppingCartItems == null) {
-            shoppingCartItems = new HashSet<>();
+            shoppingCartItems = new ArrayList<>();
         }
         model.addAttribute("productlist", shoppingCartItems);
-        System.out.println("get "+shoppingCartItems.size()+" cart items");
+        System.out.println("get " + shoppingCartItems.size() + " cart items");
+        for (var item : shoppingCartItems) {
+            System.out.println("product: " + item.getProduct().getName() + " x " + item.getCount());
+        }
         return "cart.html";
     }
 
@@ -50,6 +52,7 @@ public class ShoppingCartController {
     @PostMapping("/delete")
     @ResponseBody
     public void removeShoppingCart(@RequestParam("shoppingCartID") long cartID, @AuthenticationPrincipal User user) {
+        System.out.println("deleting shopping-cart: " + cartID);
         shoppingCartService.deleteCartByID(cartID, user);
     }
 
@@ -65,6 +68,8 @@ public class ShoppingCartController {
         }
         var item = shoppingCartOptional.get();
         item.setCount(count);
+        user.getShoppingCart().stream().filter(shoppingCart -> shoppingCart.getCartID() == item.getCartID()).findFirst()
+                .get().setCount(count);
         shoppingCartService.save(item);
         return "true";
     }

@@ -83,9 +83,15 @@ public class ShoppingCart {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof ShoppingCart){
-            return this.cartID==((ShoppingCart) obj).cartID;
+        if (obj instanceof ShoppingCart) {
+            return this.product.equals(((ShoppingCart) obj).product)
+                    && this.owner.equals(((ShoppingCart) obj).owner);
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.product.getName().hashCode();
     }
 }

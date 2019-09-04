@@ -168,4 +168,18 @@ public class ShippingAddr {
     public void setReceiverDistrict(String receiverDistrict) {
         this.receiverDistrict = receiverDistrict;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof ShippingAddr) {
+            return this.owner.equals(((ShippingAddr) o).owner)
+                    && this.receiverPhone.equals(((ShippingAddr) o).receiverPhone);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.receiverName.hashCode();
+    }
 }

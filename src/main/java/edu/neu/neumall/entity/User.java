@@ -91,7 +91,7 @@ public class User implements UserDetails {
      */
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
 //    @JsonBackReference
-    private Set<ShoppingCart> shoppingCart;
+    private List<ShoppingCart> shoppingCart;
 
     /**
      * User's shipping address list
@@ -139,11 +139,11 @@ public class User implements UserDetails {
         this.order = order;
     }
 
-    public Set<ShoppingCart> getShoppingCart() {
+    public List<ShoppingCart> getShoppingCart() {
         return shoppingCart;
     }
 
-    public void setShoppingCart(Set<ShoppingCart> shoppingCart) {
+    public void setShoppingCart(List<ShoppingCart> shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
 
@@ -269,8 +269,13 @@ public class User implements UserDetails {
     @Override
     public boolean equals(Object o) {
         if (o instanceof User) {
-            return this.getID() == ((User) o).ID;
+            return this.phone.equals(((User) o).phone);
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.phone.hashCode();
     }
 }
