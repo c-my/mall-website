@@ -46,6 +46,12 @@ public class SettleController {
     public String processSettle(@RequestParam("purchaseList[]") List<Long> purchaseItem,
                                 @RequestParam("addressID") int addressID,
                                 @AuthenticationPrincipal User user) {
+        if (purchaseItem != null) {
+            for (var cartID : purchaseItem) {
+                System.out.println(cartID);
+            }
+        }
+        System.out.println("addr id: "+addressID);
         settleService.ProcessPurchase(user, purchaseItem, addressID);
         return "settleSuccess.html";
     }

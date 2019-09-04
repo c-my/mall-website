@@ -36,7 +36,6 @@ public class SettleService {
         if (!canPurchase(shoppingCart)) {
             return false;
         }
-        ArrayList<Product> products = new ArrayList<>();
         for (var item : shoppingCart) {
             var targetProductID = item.getProduct().getID();
             var productOptional = productService.getProductByID(targetProductID);
@@ -48,6 +47,9 @@ public class SettleService {
             product.setCount(product.getCount() - item.getCount());
             productService.save(product);
             var address = shippingAddrRepository.findById(addressID).get();
+
+            //clear shopping-cart
+            shoppingCartService.deleteCartByID(item.getCartID(), user);
 
             // add a order record
             Order record = new Order();
