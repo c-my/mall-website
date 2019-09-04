@@ -44,9 +44,9 @@
             <div class="price"><p th:text="'￥'+ ${product.getProduct().price}"></p></div>
             <div class="number">
                 <p class="num clearfix">
-                    <img class="fl sub" src="img/temp/sub.jpg">
+                    <img  th:onclick="updateCart([[${product.getCartID()}]],[[${product.getCount()}-1]])" class="fl sub" src="img/temp/sub.jpg">
                     <span class="fl" th:text="${product.getCount()}"></span>
-                    <img class="fl add" src="img/temp/add.jpg">
+                    <img th:onclick="updateCart([[${product.getCartID()}]],[[${product.getCount()}+1]])" class="fl add" src="img/temp/add.jpg">
                 </p>
             </div>
             <div class="price sAll " th:text="${'￥'+product.getCount()*product.getProduct().price}"></div>
@@ -123,6 +123,7 @@
                 count:item_count
             }
         })
+
     }
 </script>
 </body>
