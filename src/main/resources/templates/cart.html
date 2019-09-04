@@ -52,7 +52,7 @@
             <div class="price sAll " th:text="${'￥'+product.getCount()*product.getProduct().price}"></div>
             <div class="price"><a th:onclick="deleteCart([[${product.getCartID()}]])" class="del">删除</a></div>
         </div>
-        <div class="goOn">空空如也~<a href="product.html">去逛逛</a></div>
+        <div class="goOn">空空如也~<a href="product">去逛逛</a></div>
         <div class="tr clearfix">
             <label class="fl">
                 <input class="checkAll" type="checkbox"/>
