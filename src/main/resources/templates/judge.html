@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>我的主页</title>
+</head>
+<body>
+<div>
+<span><!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
+<img th:src="${user.avatar}"/>
+</span>
+<!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
+<span th:text="${user.nickName}"></span>
+<span th:text="${user.phone}"></span>
+<button id="profile-btn">修改资料</button>
+</div>
+<div>
+<ul>
+<!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
+<li th:each="addr:${user.shippingAddrAddrList}">
+<span th:text="${addr.getReceiverProvince()}"></span>
+<span th:text="${addr.getReceiverCity()}"></span>
+<span th:text="${addr.getReceiverDistrict()}"></span>
+<span th:text="${addr.getReceiverPhone()}"></span>
+<span th:text="${addr.getReceiverName()}"></span>
+</li>
+</ul>
+<button id="shipping-btn">编辑收货地址</button>
+</div>
+</body>
+</html>
