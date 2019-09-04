@@ -1,10 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head lang="en">
+    <meta charset="utf-8" />
+    <title>地址管理</title>
+    <link rel="stylesheet" type="text/css" href="/css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/mygxin.css" />
 </head>
 <body>
 
+<!------------------------------idea------------------------------>
+<div class="address mt">
+    <div class="wrapper clearfix">
+        <a href="/product" class="fl">首页</a>
+        <span>/</span>
+        <a href="shipping" class="on">地址管理</a>
+    </div>
+</div>
+
+<!------------------------------Bott------------------------------>
+<div class="Bott">
+    <!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
+    <div class="wrapper clearfix">
+        <div class="zuo fl">
+            <h3>
+                <a href="#"><img th:src="${user.avatar}" width="92" height="92"/></a>
+                <p class="clearfix"><span th:text="${user.nickName}" class="fl" ></span></p>
+            </h3>
+            <div>
+                <h4>个人中心</h4>
+                <ul>
+                    <li><a href="/cart">我的购物车</a></li>
+                    <li  class="on"><a href="profile">我的信息</a></li>
+                </ul>
+                <h4>信息管理</h4>
+                <ul>
+                    <li><a href="shipping">地址管理</a></li>
+                    <li><a href="change">修改密码</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="you fl">
+            <h2>收货地址</h2>
+            <div class="add">
+                <div>
+                    <a href="#2" id="addxad"><img src="/img/jia.png"/></a>
+                    <span>添加新地址</span>
+                </div>
+                <div  id="dizhi">
+                    <!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
+                    <p th:text="${user.nickName}"></p>
+                    <p th:text="${user.phone}"></p>
+                    <p th:each="addr:${user.shippingAddrAddrList}">
+                        <span>地址：</span><span th:text="${addr.getReceiverProvince()}"></span>
+                        <span th:text="${addr.getReceiverCity()}"></span>
+                        <span th:text="${addr.getReceiverDistrict()}"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="gotop">
+    <a href="/cart">
+        <dl>
+            <dt><img src="/img/gt1.png"/></dt>
+            <dd>去购<br />物车</dd>
+        </dl>
+    </a>
+    <a href="profile">
+        <dl>
+            <dt><img src="/img/gt3.png"/></dt>
+            <dd>个人<br />中心</dd>
+        </dl>
+    </a>
+    <a href="#" class="toptop" style="display: none">
+        <dl>
+            <dt><img src="/img/gt4.png"/></dt>
+            <dd>返回<br />顶部</dd>
+        </dl>
+    </a>
+</div>
+<div class="mask"></div>
+<div class="adddz">
+    <form action="#" method="get">
+        <input type="text" placeholder="姓名" class="on" />
+        <input type="text" placeholder="手机号" />
+
+        <textarea name="" rows="" cols="" placeholder="详细地址"></textarea>
+        <div class="bc">
+            <input type="button" value="保存" />
+            <input type="button" value="取消" />
+        </div>
+    </form>
+</div>
+<!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
+<div class="readd">
+    <form action="#" method="get">
+        <input type="text"  class="on" placeholder="姓名" value="" />
+        <input type="text" placeholder="电话" value="" />
+
+        <textarea name="" rows="" cols="" placeholder="详细地址"></textarea>
+
+        <div class="bc">
+            <input type="button" value="保存" />
+            <input type="button" value="取消" />
+        </div>
+    </form>
+</div>
+
+<script src="/js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/public.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/user.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>
