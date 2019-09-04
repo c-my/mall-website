@@ -8,6 +8,8 @@ import edu.neu.neumall.repository.ProductRepository;
 import edu.neu.neumall.repository.ShoppingCartRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ShoppingCartService {
     private ShoppingCartRepository shoppingCartRepository;
@@ -24,6 +26,15 @@ public class ShoppingCartService {
         if (productOptional.isEmpty()) {
             return false;
         }
+        // cart item already exists
+        var cartExist = shoppingCartRepository.findByOwnerIDAndProductID(user.getID(), productID);
+        if (cartExist.isPresent()) {
+            var cart = cartExist.get();
+            cart.setCount(cart.getCount() + 1);
+            shoppingCartRepository.save(cart);
+            return true;
+        }
+        // item not exist, create a new one
         var product = productOptional.get();
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setCount(count);
@@ -33,4 +44,15 @@ public class ShoppingCartService {
         return true;
     }
 
+    public void deleteCartByID(long cartID) {
+        shoppingCartRepository.deleteById(cartID);
+    }
+
+    public Optional<ShoppingCart> getByID(long cartID) {
+        return shoppingCartRepository.findById(cartID);
+    }
+
+    public void save(ShoppingCart cart) {
+        shoppingCartRepository.save(cart);
+    }
 }
