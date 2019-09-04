@@ -26,6 +26,15 @@ public class ShoppingCartService {
         if (productOptional.isEmpty()) {
             return false;
         }
+        // cart item already exists
+        var cartExist = shoppingCartRepository.findByOwnerIDAndProductID(user.getID(), productID);
+        if (cartExist.isPresent()) {
+            var cart = cartExist.get();
+            cart.setCount(cart.getCount() + 1);
+            shoppingCartRepository.save(cart);
+            return true;
+        }
+        // item not exist, create a new one
         var product = productOptional.get();
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setCount(count);
