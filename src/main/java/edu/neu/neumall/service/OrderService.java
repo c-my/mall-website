@@ -125,4 +125,8 @@ public class OrderService {
         return order;
     }
 
+    public void save(Order order) {
+        orderRepository.save(order);
+    }
+
 }
