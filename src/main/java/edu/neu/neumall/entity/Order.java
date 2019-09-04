@@ -55,6 +55,10 @@ public class Order {
     @Column(name = "type")
     private OrderType type;
 
+    @NotNull
+    @ManyToOne
+    private ShippingAddr address;
+
     @CreationTimestamp
     private Date create_time;
 
@@ -107,6 +111,14 @@ public class Order {
 
     public void setID(long ID) {
         this.ID = ID;
+    }
+
+    public ShippingAddr getAddress() {
+        return address;
+    }
+
+    public void setAddress(ShippingAddr address) {
+        this.address = address;
     }
 
     public enum OrderStatus {

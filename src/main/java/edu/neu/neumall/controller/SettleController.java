@@ -36,13 +36,17 @@ public class SettleController {
                 System.out.println(cartID);
             }
         }
+        var shoppingCartList = shoppingCartRepository.findAllById(shoppingCartItems);
+        model.addAttribute("shoppingCartList", shoppingCartList);
         model.addAttribute("shippingAddrList", user.getShippingAddrAddrList());
         return "settle.html";
     }
 
     @PostMapping("/process")
-    public String processSettle(@RequestParam("purchaseList[]") List<Long> purchaseItem, @AuthenticationPrincipal User user) {
-        settleService.ProcessPurchase(user, purchaseItem);
+    public String processSettle(@RequestParam("purchaseList[]") List<Long> purchaseItem,
+                                @RequestParam("addressID") int addressID,
+                                @AuthenticationPrincipal User user) {
+        settleService.ProcessPurchase(user, purchaseItem, addressID);
         return "settleSuccess.html";
     }
 
