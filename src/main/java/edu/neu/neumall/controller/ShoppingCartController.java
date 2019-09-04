@@ -6,8 +6,7 @@ import edu.neu.neumall.entity.User;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,5 +24,14 @@ public class ShoppingCartController {
         model.addAttribute("productlist", shoppingCartItems);
 
         return "cart.html";
+    }
+
+    @PostMapping("/add")
+    @ResponseBody
+    public String appendShoppingCart(@RequestParam long productID, @RequestParam int count,
+                                     @AuthenticationPrincipal User user) {
+        ShoppingCart item = new ShoppingCart();
+
+        return "";
     }
 }
