@@ -72,4 +72,20 @@ public class ShoppingCart {
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
     }
+
+    public long getCartID() {
+        return cartID;
+    }
+
+    public void setCartID(long cartID) {
+        this.cartID = cartID;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof ShoppingCart){
+            return this.cartID==((ShoppingCart) obj).cartID;
+        }
+        return false;
+    }
 }

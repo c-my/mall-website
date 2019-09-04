@@ -44,7 +44,9 @@ public class ShoppingCartService {
         return true;
     }
 
-    public void deleteCartByID(long cartID) {
+    public void deleteCartByID(long cartID, User user) {
+        var cart = shoppingCartRepository.findById(cartID);
+        user.getShoppingCart().remove(cart);
         shoppingCartRepository.deleteById(cartID);
     }
 

@@ -32,7 +32,7 @@ public class ShoppingCartController {
             shoppingCartItems = new HashSet<>();
         }
         model.addAttribute("productlist", shoppingCartItems);
-
+        System.out.println("get "+shoppingCartItems.size()+" cart items");
         return "cart.html";
     }
 
@@ -50,7 +50,7 @@ public class ShoppingCartController {
     @PostMapping("/delete")
     @ResponseBody
     public void removeShoppingCart(@RequestParam("shoppingCartID") long cartID, @AuthenticationPrincipal User user) {
-        shoppingCartService.deleteCartByID(cartID);
+        shoppingCartService.deleteCartByID(cartID, user);
     }
 
     @PostMapping("/update")

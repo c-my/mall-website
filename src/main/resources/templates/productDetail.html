@@ -71,7 +71,8 @@
 
         <div class="add-buy-car-box">
             <a href="/cart">
-                <button class="btn-add-buy-car btn btn-danger">
+                <button class="btn-add-buy-car btn btn-danger"
+                        th:onclick="addToCart([[${product.ID}]])">
                     加入购物车
                 </button>
             </a>
@@ -165,5 +166,16 @@
     $('.item-detail-img-small img').hover(function () {
         $('.item-detail-big-img img').attr('src', $(this).attr('src'));
     });
+
+    function addToCart(product_id) {
+        $.ajax({
+            type:"POST",
+            data:{
+                count:1,
+                productID:product_id
+            },
+            url:"/cart/add"
+        })
+    }
 </script>
 </html>
