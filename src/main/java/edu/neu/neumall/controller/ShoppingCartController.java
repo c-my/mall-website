@@ -3,6 +3,8 @@ package edu.neu.neumall.controller;
 import edu.neu.neumall.entity.Product;
 import edu.neu.neumall.entity.ShoppingCart;
 import edu.neu.neumall.entity.User;
+import edu.neu.neumall.service.ShoppingCartService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +16,20 @@ import java.util.HashSet;
 @Controller
 @RequestMapping("/cart")
 public class ShoppingCartController {
+
+    private ShoppingCartService shoppingCartService;
+
+    @Autowired
+    public ShoppingCartController(ShoppingCartService shoppingCartService) {
+        this.shoppingCartService = shoppingCartService;
+    }
+
     @GetMapping
     public String shoppingCartPage(@AuthenticationPrincipal User user, Model model) {
         ArrayList<Product> products = new ArrayList<>();
         var shoppingCartItems = user.getShoppingCart();
         if (shoppingCartItems == null) {
-            shoppingCartItems = new HashSet<ShoppingCart>();
+            shoppingCartItems = new HashSet<>();
         }
         model.addAttribute("productlist", shoppingCartItems);
 
@@ -30,8 +40,32 @@ public class ShoppingCartController {
     @ResponseBody
     public String appendShoppingCart(@RequestParam long productID, @RequestParam int count,
                                      @AuthenticationPrincipal User user) {
-        ShoppingCart item = new ShoppingCart();
+        var result = shoppingCartService.addShoppingCartItem(productID, count, user);
+        if (result) {
+            return "success";
+        }
+        return "false";
+    }
 
-        return "";
+    @PostMapping("/delete")
+    @ResponseBody
+    public void removeShoppingCart(@RequestParam("shoppingCartID") long cartID, @AuthenticationPrincipal User user) {
+        shoppingCartService.deleteCartByID(cartID);
+    }
+
+    @PostMapping("/update")
+    @ResponseBody
+    public String updateShoppingCart(@RequestParam("shoppingCartID") long cartID,
+                                     @RequestParam("count") int count,
+                                     @AuthenticationPrincipal User user) {
+        var shoppingCartOptional = shoppingCartService.getByID(cartID);
+        if (shoppingCartOptional.isEmpty() || !shoppingCartOptional.get().getOwner().equals(user)
+                || count < 0) {
+            return "false";
+        }
+        var item = shoppingCartOptional.get();
+        item.setCount(count);
+        shoppingCartService.save(item);
+        return "true";
     }
 }

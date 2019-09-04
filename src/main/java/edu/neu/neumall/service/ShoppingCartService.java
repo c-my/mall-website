@@ -8,6 +8,8 @@ import edu.neu.neumall.repository.ProductRepository;
 import edu.neu.neumall.repository.ShoppingCartRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ShoppingCartService {
     private ShoppingCartRepository shoppingCartRepository;
@@ -33,4 +35,15 @@ public class ShoppingCartService {
         return true;
     }
 
+    public void deleteCartByID(long cartID) {
+        shoppingCartRepository.deleteById(cartID);
+    }
+
+    public Optional<ShoppingCart> getByID(long cartID) {
+        return shoppingCartRepository.findById(cartID);
+    }
+
+    public void save(ShoppingCart cart) {
+        shoppingCartRepository.save(cart);
+    }
 }
