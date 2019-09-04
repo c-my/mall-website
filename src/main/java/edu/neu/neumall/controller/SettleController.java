@@ -37,7 +37,7 @@ public class SettleController {
             }
         }
         var shoppingCartList = shoppingCartRepository.findAllById(shoppingCartItems);
-        model.addAttribute("shoppingCartList", shoppingCartList);
+        model.addAttribute("productList", shoppingCartList);
         model.addAttribute("shippingAddrList", user.getShippingAddrAddrList());
         return "settle.html";
     }
