@@ -25,7 +25,7 @@ public class SettleController {
         this.shoppingCartRepository = shoppingCartRepository;
     }
 
-    @GetMapping
+    @PostMapping
     public String confirmSettle(@RequestParam(value = "itemList[]", required = false) List<Long> shoppingCartItems, Model model, @AuthenticationPrincipal User user) {
         if (shoppingCartItems != null) {
             for (var cartID : shoppingCartItems) {

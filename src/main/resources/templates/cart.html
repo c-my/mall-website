@@ -29,7 +29,7 @@
         <div th:each="product:${productlist}" class="th">
             <div class="pro clearfix">
                 <label class="fl">
-                    <input type="checkbox"/>
+                    <input type="checkbox" th:onchange="tijiao([[${product.getCartID()}]] ,this)"/>
                     <span></span>
                 </label>
                 <a class="fl" href="#">
@@ -65,7 +65,7 @@
             <p class="fr">
                 <span>共<small id="sl">0</small>件商品</span>
                 <span>合计:&nbsp;<small id="all">￥0.00</small></span>
-                <a class="count">结算</a>
+                <a onclick="$('#cart-item').submit()" class="count">结算</a>
             </p>
         </div>
     </div>
@@ -114,6 +114,30 @@
         })
     }
 
+    function addInputItem(item_id) {
+        $('<input>').attr({
+            type: 'hiden',
+            id: item_id,
+            name: 'itemList[]',
+            value: item_id
+        }).appendTo('#cart-item');
+    }
+
+    function removeInputItem(item_id) {
+        $('input#'+item_id).remove()
+    }
+
+    function tijiao(item_id, checkBox)
+    {
+        if(checkBox.checked==true)
+        {
+            addInputItem(item_id);
+        }
+        else
+        {
+            removeInputItem(item_id);
+        }
+    }
     function updateCart(cart_id, item_count) {
         $.ajax({
             url:"/cart/update",
@@ -124,7 +148,11 @@
             }
         })
 
+
+
     }
 </script>
+<form id="cart-item" method="post" action="/settle">
+</form>
 </body>
 </html>
