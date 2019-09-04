@@ -15,15 +15,23 @@ public class SettleService {
 
     private ProductService productService;
     private OrderService orderService;
+    private ShoppingCartService shoppingCartService;
 
     @Autowired
     public SettleService(ProductService productService,
-                         OrderService orderService) {
+                         OrderService orderService,
+                         ShoppingCartService shoppingCartService) {
         this.productService = productService;
         this.orderService = orderService;
+        this.shoppingCartService = shoppingCartService;
     }
 
-    public boolean Purchase(User user, List<ShoppingCart> shoppingCart) {
+    public boolean ProcessPurchase(User user, List<Long> shoppingCartsID) {
+        var shoppingCarts = shoppingCartService.getShoppingCartsByID(shoppingCartsID);
+        return Purchase(user, shoppingCarts);
+    }
+
+    boolean Purchase(User user, List<ShoppingCart> shoppingCart) {
         if (!canPurchase(shoppingCart)) {
             return false;
         }
