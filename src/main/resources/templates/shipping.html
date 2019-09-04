@@ -4,6 +4,8 @@
 <head lang="en">
     <meta charset="utf-8" />
     <title>地址管理</title>
+    <script type="text/javascript" src="/js/jsAddress.js"></script>
+    <!--<script type="text/javascript" src="/js/jsAddress1.js"></script>-->
     <link rel="stylesheet" type="text/css" href="/css/public.css"/>
     <link rel="stylesheet" type="text/css" href="/css/mygxin.css" />
 </head>
@@ -87,7 +89,11 @@
     <form action="#" method="get">
         <input type="text" placeholder="姓名" class="on" />
         <input type="text" placeholder="手机号" />
-
+        <p>
+        <select id="cmbProvince" name="cmbProvince"></select>
+        <select id="cmbCity" name="cmbCity"></select>
+        <select id="cmbArea" name="cmbArea"></select>
+        </p>
         <textarea name="" rows="" cols="" placeholder="详细地址"></textarea>
         <div class="bc">
             <input type="button" value="保存" />
@@ -98,17 +104,25 @@
 <!--/*@thymesVar id="user" type="edu.neu.neumall.entity.User"*/-->
 <div class="readd">
     <form action="#" method="get">
-        <input type="text"  class="on" placeholder="姓名" value="" />
-        <input type="text" placeholder="电话" value="" />
-
+        <input type="text" placeholder="姓名" class="on" />
+        <input type="text" placeholder="手机号" />
+<div>
+    <p>
+        <select id="cmbProvince" name="cmbProvince"></select>
+        <select id="cmbCity" name="cmbCity"></select>
+        <select id="cmbArea" name="cmbArea"></select>
+    </p>
+</div>
         <textarea name="" rows="" cols="" placeholder="详细地址"></textarea>
-
         <div class="bc">
             <input type="button" value="保存" />
             <input type="button" value="取消" />
         </div>
     </form>
 </div>
+<script type="text/javascript">
+    addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+</script>
 
 <script src="/js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/public.js" type="text/javascript" charset="utf-8"></script>

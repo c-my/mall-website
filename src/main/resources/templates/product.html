@@ -35,12 +35,16 @@
         <!--/*@thymesVar id="productList" type="java.util.List<edu.neu.neumall.entity.Product>"*/-->
         <div th:each="product:${productList}" class="seckill-item">
             <div class="seckill-item-img">
+                <a th:href="@{'/product/'+${product.ID}}" >
                 <img th:src="${product.main_img}">
+                </a>
             </div>
             <div class="seckill-item-info">
+                <a th:href="@{'/product/'+${product.ID}}" >
                 <p th:text="${product.name}"></p>
+                </a>
                 <p><i class="fa fa-rmb text-danger"></i><span class="seckill-price text-danger"
-                                                                 th:text="${product.price}"></span>
+                                                              th:text="${product.price}"></span>
                     <i
                             class="fa fa-rmb"></i></p>
             </div>
