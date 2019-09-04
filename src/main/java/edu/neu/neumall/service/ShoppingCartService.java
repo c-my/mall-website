@@ -8,6 +8,7 @@ import edu.neu.neumall.repository.ProductRepository;
 import edu.neu.neumall.repository.ShoppingCartRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -60,5 +61,9 @@ public class ShoppingCartService {
 
     public void save(ShoppingCart cart) {
         shoppingCartRepository.save(cart);
+    }
+
+    public List<ShoppingCart> getShoppingCartsByID(List<Long> idList) {
+        return shoppingCartRepository.findAllById(idList);
     }
 }

@@ -2,6 +2,7 @@ package edu.neu.neumall.controller;
 
 import edu.neu.neumall.entity.User;
 import edu.neu.neumall.repository.ShoppingCartRepository;
+import edu.neu.neumall.service.SettleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -19,10 +20,13 @@ import java.util.List;
 public class SettleController {
 
     private ShoppingCartRepository shoppingCartRepository;
+    private SettleService settleService;
 
     @Autowired
-    public SettleController(ShoppingCartRepository shoppingCartRepository) {
+    public SettleController(ShoppingCartRepository shoppingCartRepository,
+                            SettleService settleService) {
         this.shoppingCartRepository = shoppingCartRepository;
+        this.settleService = settleService;
     }
 
     @PostMapping
@@ -32,13 +36,17 @@ public class SettleController {
                 System.out.println(cartID);
             }
         }
+        var shoppingCartList = shoppingCartRepository.findAllById(shoppingCartItems);
+        model.addAttribute("shoppingCartList", shoppingCartList);
         model.addAttribute("shippingAddrList", user.getShippingAddrAddrList());
         return "settle.html";
     }
 
     @PostMapping("/process")
-    public String processSettle(@RequestParam("purchaseList[]") List<Long> purchaseItem, @AuthenticationPrincipal User user) {
-
+    public String processSettle(@RequestParam("purchaseList[]") List<Long> purchaseItem,
+                                @RequestParam("addressID") int addressID,
+                                @AuthenticationPrincipal User user) {
+        settleService.ProcessPurchase(user, purchaseItem, addressID);
         return "settleSuccess.html";
     }
 

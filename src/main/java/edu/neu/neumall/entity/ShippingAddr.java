@@ -1,12 +1,14 @@
 package edu.neu.neumall.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.aspectj.weaver.ast.Or;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "ShippingAddress")
@@ -80,6 +82,9 @@ public class ShippingAddr {
 
     @UpdateTimestamp
     private Date updateTime;
+
+    @OneToMany(mappedBy = "address")
+    private List<Order> orderList;
 
     public Integer getID() {
         return ID;

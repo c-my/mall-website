@@ -1,9 +1,7 @@
 package edu.neu.neumall.service;
 
-import edu.neu.neumall.entity.Order;
-import edu.neu.neumall.entity.Product;
-import edu.neu.neumall.entity.ShoppingCart;
-import edu.neu.neumall.entity.User;
+import edu.neu.neumall.entity.*;
+import edu.neu.neumall.repository.ShippingAddrRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +13,26 @@ public class SettleService {
 
     private ProductService productService;
     private OrderService orderService;
+    private ShoppingCartService shoppingCartService;
+    private ShippingAddrRepository shippingAddrRepository;
 
     @Autowired
     public SettleService(ProductService productService,
-                         OrderService orderService) {
+                         OrderService orderService,
+                         ShoppingCartService shoppingCartService,
+                         ShippingAddrRepository shippingAddrRepository) {
         this.productService = productService;
         this.orderService = orderService;
+        this.shoppingCartService = shoppingCartService;
+        this.shippingAddrRepository = shippingAddrRepository;
     }
 
-    public boolean Purchase(User user, List<ShoppingCart> shoppingCart) {
+    public boolean ProcessPurchase(User user, List<Long> shoppingCartsID, int addressID) {
+        var shoppingCarts = shoppingCartService.getShoppingCartsByID(shoppingCartsID);
+        return Purchase(user, shoppingCarts, addressID);
+    }
+
+    boolean Purchase(User user, List<ShoppingCart> shoppingCart, int addressID) {
         if (!canPurchase(shoppingCart)) {
             return false;
         }
@@ -38,6 +47,7 @@ public class SettleService {
             var product = productOptional.get();
             product.setCount(product.getCount() - item.getCount());
             productService.save(product);
+            var address = shippingAddrRepository.findById(addressID).get();
 
             // add a order record
             Order record = new Order();
@@ -45,6 +55,7 @@ public class SettleService {
             record.setOwner(item.getOwner());
             record.setProduct(item.getProduct());
             record.setPrice(product.getPrice());
+            record.setAddress(address);
             record.setType(Order.OrderType.PURCHASE);
             orderService.save(record);
         }
